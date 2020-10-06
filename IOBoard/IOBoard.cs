@@ -14,7 +14,46 @@ namespace IOBoard
 {
     public partial class IOBoard : Form
     {
-        enum Packet : byte { STX = 0x1B, ETX = 0x1C, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
+        enum Stage : byte
+        {
+            START = 0,
+            MESSAGETYPE = 1,
+            LENGTH = 10,
+            DATA = 2,
+            PARSING = 4,
+            CHECKSUM = 3,
+            SEND = 5,
+            RESEND = 6,
+            STOP = 7,
+            WRITE = 8,
+            END = 9
+        };
+
+        public struct Message
+        {
+            public byte nextStage;
+            public byte type;
+            public byte length;
+            public byte datasize;
+            public byte dataCount;
+            public byte checksum;
+            public byte startFlag;
+            public byte[] data;
+
+            public Message(byte[] data)
+            {
+                this.nextStage = 0;
+                this.type = 0;
+                this.length = 0;
+                this.datasize = 0;
+                this.checksum = 0;
+                this.data = data;
+                dataCount = 0;
+                startFlag = 0;
+            }
+        }
+
+        enum Packet : byte { STX = 0x02, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
 
         CheckBox[] cbHex = new CheckBox[10];
         TextBox[] tbData = new TextBox[10];
@@ -210,6 +249,31 @@ namespace IOBoard
             ChangebtnCOMOpen();
         }
 
+        private byte CalChecksum(byte[] txPacket)
+        {
+            byte tmpCalChecksum = 0;
+            for (int i = 0; i < (txPacket.Length - 1) ; i++)
+            {
+                tmpCalChecksum ^= txPacket[i];
+            }
+
+            return tmpCalChecksum;
+        }
+
+        private void SendPacket(byte msgID, byte[] txPayload)
+        {
+            byte[] txPacket = new byte[txPayload.Length + 5];
+            Array.Copy(txPayload, 0, txPacket, 3, txPayload.Length);
+
+            txPacket[0] = (byte)Packet.STX;
+            txPacket[1] = msgID;
+            txPacket[2] = (byte)txPayload.Length;
+            txPacket[txPacket.Length - 2] = (byte)Packet.ETX;
+            txPacket[txPacket.Length - 1] = CalChecksum(txPacket);
+
+            SendData(txPacket);
+        }
+
         private void SendData(byte[] txData)
         {
             try
@@ -223,7 +287,32 @@ namespace IOBoard
             }
         }
 
+        private string ConvertHexToString(String hexString)
+        {
+            try
+            {
+                string ascii = string.Empty;
+
+                for (int i = 0; i < hexString.Length; i += 2)
+                {
+                    String hs = string.Empty;
+
+                    hs = hexString.Substring(i, 2);
+                    uint decval = System.Convert.ToUInt32(hs, 16);
+                    char character = System.Convert.ToChar(decval);
+                    ascii += character;
+
+                }
+
+                return ascii;
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+
+            return string.Empty;
+        }
+
         System.Collections.Concurrent.ConcurrentQueue<byte> rxBuffer = new System.Collections.Concurrent.ConcurrentQueue<byte>();
+        Message RxMessage = new Message();
         private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -240,13 +329,14 @@ namespace IOBoard
                         this.Invoke(new Action(delegate ()
                         {
                             debugHex.AppendText(DateTime.Now.ToString("\r\n[HH:mm:ss] [RX] ") + BitConverter.ToString(buff).Replace("-", " "));
+                            debugText.AppendText(ConvertHexToString(BitConverter.ToString(buff).Replace("-", "")));
                         }));
 
                         for (int i = 0; i < iRecivedSize; i++)
                         {
                             rxBuffer.Enqueue(buff[i]);
                         }
-                        ProcessMessage();
+                        //ProcessMessage();
                     }
                     catch { }
                 }
@@ -263,7 +353,17 @@ namespace IOBoard
 
         private void ProcessMessage()
         {
+            while ((rxBuffer.Count != 0) || (RxMessage.nextStage == (byte)Stage.PARSING) || (RxMessage.nextStage == (byte)Stage.CHECKSUM))
+            {
+                switch (RxMessage.nextStage)
+                {
+                    case (byte)Stage.START:
+                        break;
+                    default:
+                        break;
 
+                }
+            }
         }
 
         private void BtnCOMOpen_Click(object sender, EventArgs e)
@@ -342,16 +442,22 @@ namespace IOBoard
             {
                 string saveImageFileName = ShowFileOpenDialog();
                 FileStream fs = new FileStream(saveImageFileName, FileMode.Open, FileAccess.Read);
+                UInt16 FwTotalNo = (UInt16)(fs.Length / 192 + 1);
+                byte[] tmpFwData = new byte[192];
+                byte[] tmpPayload = new byte[192 + 2];
 
                 if (serialPort.IsOpen)
                 {
                     debugText.AppendText("전송 중 ");
-                    for (Int32 i = 0; i < 261120; i++)
+                    for (Int32 i = 0; i < FwTotalNo; i++)
                     {
-                        Byte[] readByte = new Byte[1];
-                        readByte[0] = (Byte)fs.ReadByte();
-                        serialPort.Write(readByte, 0, 1);
-                        if (i % 10000 == 0)
+                        fs.Read(tmpFwData, 0, 192);
+                        Array.Copy(tmpFwData, 0, tmpPayload, 2, 192);
+                        tmpPayload[0] = (byte)((i >> 8) & 0xFF);
+                        tmpPayload[1] = (byte)(i  & 0xFF);
+                        SendPacket(0x1f, tmpPayload);
+
+                        if (i % 10 == 0)
                         {
                             debugText.AppendText(".");
                         }
@@ -365,6 +471,50 @@ namespace IOBoard
                 fs.Close();
             }
             catch { }
+            
+        }
+
+        private void btnRequestIOBoardInfo_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[0];
+            SendPacket(0x11, tmpPayload);
+        }
+
+        private void btnUpdateConfig_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[0];
+            SendPacket(0x12, tmpPayload);
+        }
+
+        private void btnRequestConfig_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[0];
+            SendPacket(0x13, tmpPayload);
+        }
+
+        private void btnUpdateTime_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[6];
+            tmpPayload[0] = (byte)(DateTime.Now.Year - 2000);
+            tmpPayload[1] = (byte)(DateTime.Now.Month);
+            tmpPayload[2] = (byte)(DateTime.Now.Day);
+            tmpPayload[3] = (byte)(DateTime.Now.Hour);
+            tmpPayload[4] = (byte)(DateTime.Now.Minute);
+            tmpPayload[5] = (byte)(DateTime.Now.Second);
+
+            SendPacket(0x14, tmpPayload);
+        }
+
+        private void btnRequestCalWattMeter_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[6];
+            SendPacket(0x1a, tmpPayload);
+        }
+
+        private void btnRequestWattMeterValue_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[6];
+            SendPacket(0x1b, tmpPayload);
         }
     }
 

@@ -40,6 +40,12 @@
             this.debugHex = new System.Windows.Forms.TextBox();
             this.panel_sendData = new System.Windows.Forms.Panel();
             this.btnFileSendSend = new System.Windows.Forms.Button();
+            this.btnRequestIOBoardInfo = new System.Windows.Forms.Button();
+            this.btnUpdateConfig = new System.Windows.Forms.Button();
+            this.btnRequestConfig = new System.Windows.Forms.Button();
+            this.btnUpdateTime = new System.Windows.Forms.Button();
+            this.btnRequestCalWattMeter = new System.Windows.Forms.Button();
+            this.btnRequestWattMeterValue = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -158,7 +164,7 @@
             // 
             // btnFileSendSend
             // 
-            this.btnFileSendSend.Location = new System.Drawing.Point(15, 242);
+            this.btnFileSendSend.Location = new System.Drawing.Point(104, 182);
             this.btnFileSendSend.Name = "btnFileSendSend";
             this.btnFileSendSend.Size = new System.Drawing.Size(100, 50);
             this.btnFileSendSend.TabIndex = 34;
@@ -166,11 +172,77 @@
             this.btnFileSendSend.UseVisualStyleBackColor = true;
             this.btnFileSendSend.Click += new System.EventHandler(this.BtnFileSendSend_Click);
             // 
+            // btnRequestIOBoardInfo
+            // 
+            this.btnRequestIOBoardInfo.Location = new System.Drawing.Point(104, 12);
+            this.btnRequestIOBoardInfo.Name = "btnRequestIOBoardInfo";
+            this.btnRequestIOBoardInfo.Size = new System.Drawing.Size(100, 50);
+            this.btnRequestIOBoardInfo.TabIndex = 35;
+            this.btnRequestIOBoardInfo.Text = "보드 정보 요청";
+            this.btnRequestIOBoardInfo.UseVisualStyleBackColor = true;
+            this.btnRequestIOBoardInfo.Click += new System.EventHandler(this.btnRequestIOBoardInfo_Click);
+            // 
+            // btnUpdateConfig
+            // 
+            this.btnUpdateConfig.Location = new System.Drawing.Point(104, 70);
+            this.btnUpdateConfig.Name = "btnUpdateConfig";
+            this.btnUpdateConfig.Size = new System.Drawing.Size(100, 50);
+            this.btnUpdateConfig.TabIndex = 36;
+            this.btnUpdateConfig.Text = "CONFIG 전송";
+            this.btnUpdateConfig.UseVisualStyleBackColor = true;
+            this.btnUpdateConfig.Click += new System.EventHandler(this.btnUpdateConfig_Click);
+            // 
+            // btnRequestConfig
+            // 
+            this.btnRequestConfig.Location = new System.Drawing.Point(210, 70);
+            this.btnRequestConfig.Name = "btnRequestConfig";
+            this.btnRequestConfig.Size = new System.Drawing.Size(100, 50);
+            this.btnRequestConfig.TabIndex = 37;
+            this.btnRequestConfig.Text = "CONFIG 요청";
+            this.btnRequestConfig.UseVisualStyleBackColor = true;
+            this.btnRequestConfig.Click += new System.EventHandler(this.btnRequestConfig_Click);
+            // 
+            // btnUpdateTime
+            // 
+            this.btnUpdateTime.Location = new System.Drawing.Point(210, 12);
+            this.btnUpdateTime.Name = "btnUpdateTime";
+            this.btnUpdateTime.Size = new System.Drawing.Size(100, 50);
+            this.btnUpdateTime.TabIndex = 38;
+            this.btnUpdateTime.Text = "시간 설정";
+            this.btnUpdateTime.UseVisualStyleBackColor = true;
+            this.btnUpdateTime.Click += new System.EventHandler(this.btnUpdateTime_Click);
+            // 
+            // btnRequestCalWattMeter
+            // 
+            this.btnRequestCalWattMeter.Location = new System.Drawing.Point(104, 126);
+            this.btnRequestCalWattMeter.Name = "btnRequestCalWattMeter";
+            this.btnRequestCalWattMeter.Size = new System.Drawing.Size(100, 50);
+            this.btnRequestCalWattMeter.TabIndex = 39;
+            this.btnRequestCalWattMeter.Text = "적산전력계 CAL";
+            this.btnRequestCalWattMeter.UseVisualStyleBackColor = true;
+            this.btnRequestCalWattMeter.Click += new System.EventHandler(this.btnRequestCalWattMeter_Click);
+            // 
+            // btnRequestWattMeterValue
+            // 
+            this.btnRequestWattMeterValue.Location = new System.Drawing.Point(210, 126);
+            this.btnRequestWattMeterValue.Name = "btnRequestWattMeterValue";
+            this.btnRequestWattMeterValue.Size = new System.Drawing.Size(100, 50);
+            this.btnRequestWattMeterValue.TabIndex = 40;
+            this.btnRequestWattMeterValue.Text = "적산전력계 값 요청";
+            this.btnRequestWattMeterValue.UseVisualStyleBackColor = true;
+            this.btnRequestWattMeterValue.Click += new System.EventHandler(this.btnRequestWattMeterValue_Click);
+            // 
             // IOBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.btnRequestWattMeterValue);
+            this.Controls.Add(this.btnRequestCalWattMeter);
+            this.Controls.Add(this.btnUpdateTime);
+            this.Controls.Add(this.btnRequestConfig);
+            this.Controls.Add(this.btnUpdateConfig);
+            this.Controls.Add(this.btnRequestIOBoardInfo);
             this.Controls.Add(this.btnFileSendSend);
             this.Controls.Add(this.panel_sendData);
             this.Controls.Add(this.splitContainer1);
@@ -203,5 +275,11 @@
         private System.Windows.Forms.TextBox debugHex;
         private System.Windows.Forms.Panel panel_sendData;
         private System.Windows.Forms.Button btnFileSendSend;
+        private System.Windows.Forms.Button btnRequestIOBoardInfo;
+        private System.Windows.Forms.Button btnUpdateConfig;
+        private System.Windows.Forms.Button btnRequestConfig;
+        private System.Windows.Forms.Button btnUpdateTime;
+        private System.Windows.Forms.Button btnRequestCalWattMeter;
+        private System.Windows.Forms.Button btnRequestWattMeterValue;
     }
 }

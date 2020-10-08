@@ -409,7 +409,7 @@ namespace IOBoard
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.AutoUpgradeEnabled = false;
             ofd.Title = "전송 할 파일 선택";
-            ofd.Filter = "펌웨어 파일 (*.bin) | *.bin |모든 파일 (*.*) | *.*";
+            ofd.Filter = "펌웨어 파일 (*.bin) | *.bin|모든 파일 (*.*) | *.*";
 
             //파일 오픈창 로드
             DialogResult dr = ofd.ShowDialog();
@@ -457,7 +457,7 @@ namespace IOBoard
                         tmpPayload[1] = (byte)(i  & 0xFF);
                         SendPacket(0x1f, tmpPayload);
 
-                        if (i % 10 == 0)
+                        if (i % 5 == 0)
                         {
                             debugText.AppendText(".");
                         }
@@ -515,6 +515,12 @@ namespace IOBoard
         {
             byte[] tmpPayload = new byte[6];
             SendPacket(0x1b, tmpPayload);
+        }
+
+        private void btnRequestReset_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[6];
+            SendPacket(0x99, tmpPayload);
         }
     }
 

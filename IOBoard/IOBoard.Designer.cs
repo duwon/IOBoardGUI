@@ -46,6 +46,7 @@
             this.btnUpdateTime = new System.Windows.Forms.Button();
             this.btnRequestCalWattMeter = new System.Windows.Forms.Button();
             this.btnRequestWattMeterValue = new System.Windows.Forms.Button();
+            this.btnRequestReset = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -232,11 +233,22 @@
             this.btnRequestWattMeterValue.UseVisualStyleBackColor = true;
             this.btnRequestWattMeterValue.Click += new System.EventHandler(this.btnRequestWattMeterValue_Click);
             // 
+            // btnRequestReset
+            // 
+            this.btnRequestReset.Location = new System.Drawing.Point(210, 182);
+            this.btnRequestReset.Name = "btnRequestReset";
+            this.btnRequestReset.Size = new System.Drawing.Size(100, 50);
+            this.btnRequestReset.TabIndex = 41;
+            this.btnRequestReset.Text = "재시작";
+            this.btnRequestReset.UseVisualStyleBackColor = true;
+            this.btnRequestReset.Click += new System.EventHandler(this.btnRequestReset_Click);
+            // 
             // IOBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 561);
+            this.Controls.Add(this.btnRequestReset);
             this.Controls.Add(this.btnRequestWattMeterValue);
             this.Controls.Add(this.btnRequestCalWattMeter);
             this.Controls.Add(this.btnUpdateTime);
@@ -281,5 +293,6 @@
         private System.Windows.Forms.Button btnUpdateTime;
         private System.Windows.Forms.Button btnRequestCalWattMeter;
         private System.Windows.Forms.Button btnRequestWattMeterValue;
+        private System.Windows.Forms.Button btnRequestReset;
     }
 }

@@ -63,7 +63,11 @@ namespace IOBoard
         {
             InitializeComponent();
             RefreshCOMPortName();
-            this.Size = new Size(1000, 600);
+            this.Size = new Size(1000, 630);
+
+            //panel_sendData
+            panel_config.Visible = false;
+            panel_config.Location = new Point(317, 0);
 
             string[] strtbText, strcbHex = new String[10];
             strtbText = Properties.Settings.Default.tbText.Split(new char[] { '`' });
@@ -366,6 +370,20 @@ namespace IOBoard
             }
         }
 
+        private void ParsingMessage()
+        {
+            switch (RxMessage.type)
+            {
+                case 0x21:
+                    break;
+                case 0x22:
+                    lbBoardTime.Text = "";
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void BtnCOMOpen_Click(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
@@ -507,20 +525,32 @@ namespace IOBoard
 
         private void btnRequestCalWattMeter_Click(object sender, EventArgs e)
         {
-            byte[] tmpPayload = new byte[6];
+            byte[] tmpPayload = new byte[0];
             SendPacket(0x1a, tmpPayload);
         }
 
         private void btnRequestWattMeterValue_Click(object sender, EventArgs e)
         {
-            byte[] tmpPayload = new byte[6];
+            byte[] tmpPayload = new byte[0];
             SendPacket(0x1b, tmpPayload);
         }
 
         private void btnRequestReset_Click(object sender, EventArgs e)
         {
-            byte[] tmpPayload = new byte[6];
+            byte[] tmpPayload = new byte[0];
             SendPacket(0x99, tmpPayload);
+        }
+
+        private void btnSetConfig_Click(object sender, EventArgs e)
+        {
+            if(panel_config.Visible == true)
+            {
+                panel_config.Visible = false;
+            }
+            else
+            {
+                panel_config.Visible = true;
+            }
         }
     }
 

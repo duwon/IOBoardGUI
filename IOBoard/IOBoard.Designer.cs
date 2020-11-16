@@ -78,7 +78,7 @@
             this.panel_status = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbDO1Value = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -100,8 +100,10 @@
             this.label23 = new System.Windows.Forms.Label();
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.tbDO0Value = new System.Windows.Forms.TextBox();
             this.timer1s = new System.Windows.Forms.Timer(this.components);
+            this.btn_DO1 = new System.Windows.Forms.Button();
+            this.btn_DO2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -218,7 +220,6 @@
             this.debugHex.Size = new System.Drawing.Size(758, 440);
             this.debugHex.TabIndex = 0;
             this.debugHex.Text = "HEX \r\n";
-            this.debugHex.Enter += new System.EventHandler(this.debugHex_Enter);
             // 
             // panel_sendData
             // 
@@ -229,7 +230,7 @@
             // 
             // btnFileSendSend
             // 
-            this.btnFileSendSend.Location = new System.Drawing.Point(114, 212);
+            this.btnFileSendSend.Location = new System.Drawing.Point(114, 192);
             this.btnFileSendSend.Name = "btnFileSendSend";
             this.btnFileSendSend.Size = new System.Drawing.Size(90, 44);
             this.btnFileSendSend.TabIndex = 34;
@@ -249,7 +250,7 @@
             // 
             // btnUpdateConfig
             // 
-            this.btnUpdateConfig.Location = new System.Drawing.Point(114, 147);
+            this.btnUpdateConfig.Location = new System.Drawing.Point(114, 137);
             this.btnUpdateConfig.Name = "btnUpdateConfig";
             this.btnUpdateConfig.Size = new System.Drawing.Size(90, 44);
             this.btnUpdateConfig.TabIndex = 36;
@@ -259,7 +260,7 @@
             // 
             // btnRequestConfig
             // 
-            this.btnRequestConfig.Location = new System.Drawing.Point(220, 147);
+            this.btnRequestConfig.Location = new System.Drawing.Point(220, 137);
             this.btnRequestConfig.Name = "btnRequestConfig";
             this.btnRequestConfig.Size = new System.Drawing.Size(90, 44);
             this.btnRequestConfig.TabIndex = 37;
@@ -299,7 +300,7 @@
             // 
             // btnRequestReset
             // 
-            this.btnRequestReset.Location = new System.Drawing.Point(220, 212);
+            this.btnRequestReset.Location = new System.Drawing.Point(220, 192);
             this.btnRequestReset.Name = "btnRequestReset";
             this.btnRequestReset.Size = new System.Drawing.Size(90, 44);
             this.btnRequestReset.TabIndex = 41;
@@ -568,7 +569,7 @@
             // 
             // btnSetConfig
             // 
-            this.btnSetConfig.Location = new System.Drawing.Point(12, 147);
+            this.btnSetConfig.Location = new System.Drawing.Point(12, 137);
             this.btnSetConfig.Name = "btnSetConfig";
             this.btnSetConfig.Size = new System.Drawing.Size(90, 44);
             this.btnSetConfig.TabIndex = 42;
@@ -587,7 +588,7 @@
             // 
             // btnViewStatusValue
             // 
-            this.btnViewStatusValue.Location = new System.Drawing.Point(12, 212);
+            this.btnViewStatusValue.Location = new System.Drawing.Point(12, 192);
             this.btnViewStatusValue.Name = "btnViewStatusValue";
             this.btnViewStatusValue.Size = new System.Drawing.Size(90, 44);
             this.btnViewStatusValue.TabIndex = 44;
@@ -599,7 +600,7 @@
             // 
             this.panel_status.Controls.Add(this.label25);
             this.panel_status.Controls.Add(this.label13);
-            this.panel_status.Controls.Add(this.textBox1);
+            this.panel_status.Controls.Add(this.tbDO1Value);
             this.panel_status.Controls.Add(this.label14);
             this.panel_status.Controls.Add(this.textBox2);
             this.panel_status.Controls.Add(this.label15);
@@ -621,7 +622,7 @@
             this.panel_status.Controls.Add(this.label23);
             this.panel_status.Controls.Add(this.textBox11);
             this.panel_status.Controls.Add(this.label24);
-            this.panel_status.Controls.Add(this.textBox12);
+            this.panel_status.Controls.Add(this.tbDO0Value);
             this.panel_status.Location = new System.Drawing.Point(861, 359);
             this.panel_status.Name = "panel_status";
             this.panel_status.Size = new System.Drawing.Size(667, 296);
@@ -647,14 +648,14 @@
             this.label13.TabIndex = 25;
             this.label13.Text = "Do[1]";
             // 
-            // textBox1
+            // tbDO1Value
             // 
-            this.textBox1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox1.Location = new System.Drawing.Point(143, 58);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(77, 22);
-            this.textBox1.TabIndex = 24;
-            this.textBox1.Text = "0";
+            this.tbDO1Value.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbDO1Value.Location = new System.Drawing.Point(143, 58);
+            this.tbDO1Value.Name = "tbDO1Value";
+            this.tbDO1Value.Size = new System.Drawing.Size(77, 22);
+            this.tbDO1Value.TabIndex = 24;
+            this.tbDO1Value.Text = "0";
             // 
             // label14
             // 
@@ -856,14 +857,14 @@
             this.label24.TabIndex = 1;
             this.label24.Text = "Do[0]";
             // 
-            // textBox12
+            // tbDO0Value
             // 
-            this.textBox12.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox12.Location = new System.Drawing.Point(143, 27);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(77, 22);
-            this.textBox12.TabIndex = 0;
-            this.textBox12.Text = "0";
+            this.tbDO0Value.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbDO0Value.Location = new System.Drawing.Point(143, 27);
+            this.tbDO0Value.Name = "tbDO0Value";
+            this.tbDO0Value.Size = new System.Drawing.Size(77, 22);
+            this.tbDO0Value.TabIndex = 0;
+            this.tbDO0Value.Text = "0";
             // 
             // timer1s
             // 
@@ -871,11 +872,33 @@
             this.timer1s.Interval = 1000;
             this.timer1s.Tick += new System.EventHandler(this.timer_1s_interrupt);
             // 
+            // btn_DO1
+            // 
+            this.btn_DO1.Location = new System.Drawing.Point(12, 246);
+            this.btn_DO1.Name = "btn_DO1";
+            this.btn_DO1.Size = new System.Drawing.Size(43, 44);
+            this.btn_DO1.TabIndex = 45;
+            this.btn_DO1.Text = "DO 1";
+            this.btn_DO1.UseVisualStyleBackColor = true;
+            this.btn_DO1.Click += new System.EventHandler(this.btn_DO_Click);
+            // 
+            // btn_DO2
+            // 
+            this.btn_DO2.Location = new System.Drawing.Point(59, 246);
+            this.btn_DO2.Name = "btn_DO2";
+            this.btn_DO2.Size = new System.Drawing.Size(43, 44);
+            this.btn_DO2.TabIndex = 46;
+            this.btn_DO2.Text = "DO 1";
+            this.btn_DO2.UseVisualStyleBackColor = true;
+            this.btn_DO2.Click += new System.EventHandler(this.btn_DO_Click);
+            // 
             // IOBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1540, 747);
+            this.Controls.Add(this.btn_DO2);
+            this.Controls.Add(this.btn_DO1);
             this.Controls.Add(this.panel_status);
             this.Controls.Add(this.btnViewStatusValue);
             this.Controls.Add(this.lbBoardTime);
@@ -964,7 +987,7 @@
         private System.Windows.Forms.Panel panel_status;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbDO1Value;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label15;
@@ -986,7 +1009,9 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox tbDO0Value;
         private System.Windows.Forms.Timer timer1s;
+        private System.Windows.Forms.Button btn_DO1;
+        private System.Windows.Forms.Button btn_DO2;
     }
 }

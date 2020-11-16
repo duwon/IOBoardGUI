@@ -80,6 +80,7 @@ namespace IOBoard
         TextBox[] tbData = new TextBox[10];
         Button[] btnSend = new Button[10];
 
+        [System.ComponentModel.Browsable(false)]
         public IOBoard()
         {
             InitializeComponent();
@@ -162,7 +163,7 @@ namespace IOBoard
 
         private void IOBoard_Load(object sender, EventArgs e)
         {
-
+            
         }
         private void IOBoard_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -498,6 +499,9 @@ namespace IOBoard
                     tbDI1.Text = stIOStatus.Di[1].ToString();
                     tbDI2.Text = stIOStatus.Di[2].ToString();
                     tbDI3.Text = stIOStatus.Di[3].ToString();
+
+                    tbDO0Value.Text = stIOStatus.Do[0].ToString();
+                    tbDO1Value.Text = stIOStatus.Do[1].ToString();
                     break;
                 case 0x21: //MSGCMD_RESPONSE_TIME 0x21U
                     Console.WriteLine("MSGCMD_RESPONSE_TIME 0x21U");
@@ -509,26 +513,32 @@ namespace IOBoard
                     break;
                 case 0x23: //MSGCMD_RESPONSE_CONFIG
                     Console.WriteLine("MSGCMD_RESPONSE_CONFIG 0x23U");
-                    tbDO0.Text = RxMessage.data[0].ToString();
-                    tbDO1.Text = RxMessage.data[1].ToString();
-                    tbRTDCycle.Text = RxMessage.data[2].ToString();
-                    tbAICycle.Text = RxMessage.data[3].ToString();
-                    tbDICycle.Text = RxMessage.data[4].ToString();
-                    tbDPSCycle.Text = RxMessage.data[5].ToString();
-                    tbPSCycle.Text = RxMessage.data[6].ToString();
-                    tbPMMode.Text = RxMessage.data[7].ToString();
-                    tbPMCycle.Text = RxMessage.data[8].ToString();
-                    tbPMVolt.Text = (RxMessage.data[9] + (RxMessage.data[10] << 8)).ToString();
-                    tbPMCurrent.Text = RxMessage.data[11].ToString();
-                    tbPMFreq.Text = RxMessage.data[12].ToString();
+                    this.Invoke(new Action(delegate ()
+                    {
+                        tbDO0.Text = RxMessage.data[0].ToString();
+                        tbDO1.Text = RxMessage.data[1].ToString();
+                        tbRTDCycle.Text = RxMessage.data[2].ToString();
+                        tbAICycle.Text = RxMessage.data[3].ToString();
+                        tbDICycle.Text = RxMessage.data[4].ToString();
+                        tbDPSCycle.Text = RxMessage.data[5].ToString();
+                        tbPSCycle.Text = RxMessage.data[6].ToString();
+                        tbPMMode.Text = RxMessage.data[7].ToString();
+                        tbPMCycle.Text = RxMessage.data[8].ToString();
+                        tbPMVolt.Text = (RxMessage.data[9] + (RxMessage.data[10] << 8)).ToString();
+                        tbPMCurrent.Text = RxMessage.data[11].ToString();
+                        tbPMFreq.Text = RxMessage.data[12].ToString();
+                    }));
                     break;
                 case 0x2F: //Firmware ACK
-                        Console.WriteLine("MSGCMD_RESPONSE_FW_ACK 0x2FU");
+                    Console.WriteLine("MSGCMD_RESPONSE_FW_ACK 0x2FU");
                     byte[] tmpPayload = new byte[192 + 2];
                     int fwSeqNum = ((RxMessage.data[0] & 0x7F) << 8) + RxMessage.data[1] + 1;
                     if (fwSeqNum == firmwarePacket.GetLength(0))
                     {
-                        debugText.AppendText("\r\nEND\r\n");
+                        this.Invoke(new Action(delegate ()
+                        {
+                            debugText.AppendText("\r\nEND\r\n");
+                        }));
                     }
                     else if (fwSeqNum < firmwarePacket.GetLength(0))
                     { 
@@ -783,14 +793,37 @@ namespace IOBoard
 
         private void timer_1s_interrupt(object sender, EventArgs e)
         {
-            //ProcessMessage();
+
         }
 
-        private void debugHex_Enter(object sender, EventArgs e)
+        private void btn_DO_Click(object sender, EventArgs e)
         {
-            //debugHex.SelectionStart = debugHex.Text.Length;
+            byte[] tmpPayload = new byte[2];
+            Button [] btnDO = new Button[] { btn_DO1, btn_DO2};
+            for(int i=0; i<btnDO.Length; i++)
+            {
+                if (sender.Equals(btnDO[i]) == true)
+                {
+                    if (btnDO[i].BackColor != Color.Green)
+                    {
+                        btnDO[i].BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        btnDO[i].BackColor = Color.Gainsboro;
+                    }
+                }
 
-    debugHex.ScrollToCaret();
+                if(btnDO[i].BackColor == Color.Green)
+                {
+                    tmpPayload[i] = 1;
+                }
+                else
+                {
+                    tmpPayload[i] = 0;
+                }
+            }
+            SendPacket(0x15, tmpPayload);
         }
     }
 

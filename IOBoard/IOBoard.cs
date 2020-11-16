@@ -53,7 +53,28 @@ namespace IOBoard
             }
         }
 
+        public struct IOStatus
+        {
+            public float Volt;
+            public float Current;
+            public float Cos;
+            public float Active;
+            public float Reactive;
+            public float Apparent;
+            public float Active_Energy;
+            public UInt16 Rtd;
+            public UInt16 Dps;
+            public UInt16 Ps;
+            public UInt16[] Ai;
+            public byte[] Di;
+            public byte[] Do;
+        }
+
         enum Packet : byte { STX = 0x02, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
+        System.Collections.Concurrent.ConcurrentQueue<byte> rxBuffer = new System.Collections.Concurrent.ConcurrentQueue<byte>();
+        Message RxMessage = new Message();
+        IOStatus stIOStatus;
+
 
         CheckBox[] cbHex = new CheckBox[10];
         TextBox[] tbData = new TextBox[10];
@@ -65,10 +86,18 @@ namespace IOBoard
             RefreshCOMPortName();
             this.Size = new Size(1000, 630);
 
-            //panel_sendData
+            RxMessage.data = new byte[256];
+            stIOStatus.Ai = new UInt16[2];
+            stIOStatus.Di = new byte[4];
+            stIOStatus.Do = new byte[2];
+
+            //panel_setConfig
             panel_config.Visible = false;
             panel_config.Location = new Point(317, 0);
-
+            //panel_viewStatus
+            panel_status.Visible = false;
+            panel_status.Location = new Point(317, 0);
+            //panel_sendData
             string[] strtbText, strcbHex = new String[10];
             strtbText = Properties.Settings.Default.tbText.Split(new char[] { '`' });
             strcbHex = Properties.Settings.Default.cbHex.Split(new char[] { ',' });
@@ -315,8 +344,6 @@ namespace IOBoard
             return string.Empty;
         }
 
-        System.Collections.Concurrent.ConcurrentQueue<byte> rxBuffer = new System.Collections.Concurrent.ConcurrentQueue<byte>();
-        Message RxMessage = new Message();
         private void serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             try
@@ -340,9 +367,16 @@ namespace IOBoard
                         {
                             rxBuffer.Enqueue(buff[i]);
                         }
-                        //ProcessMessage();
+                        ProcessMessage();
                     }
-                    catch { }
+                    catch ( System.Exception ex )
+                    {
+                        this.Invoke(new Action(delegate ()
+                        {
+                            this.debugText.AppendText(ex.Message);
+                            this.debugText.AppendText("\r\n");
+                        }));
+                    }
                 }
             }
             catch (System.Exception ex)
@@ -355,13 +389,75 @@ namespace IOBoard
             }
         }
 
-        private void ProcessMessage()
+        public void ProcessMessage()
         {
-            while ((rxBuffer.Count != 0) || (RxMessage.nextStage == (byte)Stage.PARSING) || (RxMessage.nextStage == (byte)Stage.CHECKSUM))
+            byte _tch;
+            while ((rxBuffer.Count != 0) || (RxMessage.nextStage == (byte)Stage.PARSING))
             {
                 switch (RxMessage.nextStage)
                 {
                     case (byte)Stage.START:
+                        for (int i = 0; i < rxBuffer.Count; i++)
+                        {
+                            rxBuffer.TryDequeue(out _tch);
+                            if (_tch == (byte)Packet.STX)
+                            {
+                                RxMessage.nextStage = (byte)Stage.MESSAGETYPE;
+                                break;
+                            }
+                        }
+                        break;
+                    case (byte)Stage.MESSAGETYPE:
+                        rxBuffer.TryDequeue(out RxMessage.type);
+                        RxMessage.nextStage = (byte)Stage.LENGTH;
+                        break;
+                    case (byte)Stage.LENGTH:
+                        rxBuffer.TryDequeue(out RxMessage.length);
+                        RxMessage.nextStage = (byte)Stage.DATA;
+                        break;
+                    case (byte)Stage.DATA:
+                        rxBuffer.TryDequeue(out RxMessage.data[RxMessage.dataCount]);
+                        RxMessage.dataCount++;
+
+                        if (RxMessage.dataCount == RxMessage.length)
+                        {
+                            RxMessage.dataCount = 0;
+                            RxMessage.nextStage = (byte)Stage.END;
+                        }
+                        break;
+                    case (byte)Stage.END:
+                        rxBuffer.TryDequeue(out _tch);
+                        if (_tch == (byte)Packet.ETX)
+                        {
+                            RxMessage.nextStage = (byte)Stage.CHECKSUM;
+                        }
+                        else
+                        {
+                            RxMessage.nextStage = (byte)Stage.START;
+                        }
+                        break;
+                    case (byte)Stage.CHECKSUM:
+                        byte[] tmpRxMessageData = new byte[RxMessage.length + 5];
+                        rxBuffer.TryDequeue(out _tch);
+
+                        tmpRxMessageData[0] = (byte)Packet.STX;
+                        tmpRxMessageData[1] = RxMessage.type;
+                        tmpRxMessageData[2] = (byte)RxMessage.length;
+                        Array.Copy(RxMessage.data, 0, tmpRxMessageData, 3, RxMessage.length);
+                        tmpRxMessageData[RxMessage.length + 5 - 2] = (byte)Packet.ETX;
+
+                        if(_tch == CalChecksum(tmpRxMessageData))
+                        {
+                            RxMessage.nextStage = (byte)Stage.PARSING;
+                        }
+                        else
+                        {
+                            RxMessage.nextStage = (byte)Stage.START;
+                        }
+                        break;
+                    case (byte)Stage.PARSING:
+                        ParsingMessage();
+                        RxMessage.nextStage = (byte)Stage.START;
                         break;
                     default:
                         break;
@@ -374,12 +470,81 @@ namespace IOBoard
         {
             switch (RxMessage.type)
             {
-                case 0x21:
+                case 0x20: //MSGCMD_INFO_IOVALUE 0x20U
+                    Console.WriteLine("MSGCMD_INFO_IOVALUE 0x20U");
+
+                    stIOStatus.Volt = BitConverter.ToSingle(RxMessage.data, 0);
+                    stIOStatus.Current = BitConverter.ToSingle(RxMessage.data, 4);
+                    stIOStatus.Cos = BitConverter.ToSingle(RxMessage.data, 8);
+                    stIOStatus.Active = BitConverter.ToSingle(RxMessage.data, 12);
+                    stIOStatus.Reactive = BitConverter.ToSingle(RxMessage.data, 16);
+                    stIOStatus.Apparent = BitConverter.ToSingle(RxMessage.data, 20);
+                    stIOStatus.Active_Energy = BitConverter.ToSingle(RxMessage.data, 24);
+
+                    stIOStatus.Rtd = BitConverter.ToUInt16(RxMessage.data, 28);
+                    stIOStatus.Dps = BitConverter.ToUInt16(RxMessage.data, 30);
+                    stIOStatus.Ps = BitConverter.ToUInt16(RxMessage.data, 32);
+                    stIOStatus.Ai[0] = BitConverter.ToUInt16(RxMessage.data, 34);
+                    stIOStatus.Ai[1] = BitConverter.ToUInt16(RxMessage.data, 36);
+
+                    stIOStatus.Di[0] = RxMessage.data[38];
+                    stIOStatus.Di[1] = RxMessage.data[39];
+                    stIOStatus.Di[2] = RxMessage.data[40];
+                    stIOStatus.Di[3] = RxMessage.data[41];
+                    stIOStatus.Do[0] = RxMessage.data[42];
+                    stIOStatus.Do[1] = RxMessage.data[43];
+
+                    tbDI0.Text = stIOStatus.Di[0].ToString();
+                    tbDI1.Text = stIOStatus.Di[1].ToString();
+                    tbDI2.Text = stIOStatus.Di[2].ToString();
+                    tbDI3.Text = stIOStatus.Di[3].ToString();
                     break;
-                case 0x22:
-                    lbBoardTime.Text = "";
+                case 0x21: //MSGCMD_RESPONSE_TIME 0x21U
+                    Console.WriteLine("MSGCMD_RESPONSE_TIME 0x21U");
+                    this.Invoke(new Action(delegate ()
+                    {
+                        lbBoardTime.Text = (RxMessage.data[0] + 2000).ToString() + "-" + RxMessage.data[1].ToString() + "-" + RxMessage.data[2].ToString() + " " + RxMessage.data[3].ToString() + ":" + RxMessage.data[4].ToString() + ":" + RxMessage.data[5].ToString() + " V" + RxMessage.data[6].ToString() + "." + RxMessage.data[7].ToString();
+                    }));
+                    
+                    break;
+                case 0x23: //MSGCMD_RESPONSE_CONFIG
+                    Console.WriteLine("MSGCMD_RESPONSE_CONFIG 0x23U");
+                    tbDO0.Text = RxMessage.data[0].ToString();
+                    tbDO1.Text = RxMessage.data[1].ToString();
+                    tbRTDCycle.Text = RxMessage.data[2].ToString();
+                    tbAICycle.Text = RxMessage.data[3].ToString();
+                    tbDICycle.Text = RxMessage.data[4].ToString();
+                    tbDPSCycle.Text = RxMessage.data[5].ToString();
+                    tbPSCycle.Text = RxMessage.data[6].ToString();
+                    tbPMMode.Text = RxMessage.data[7].ToString();
+                    tbPMCycle.Text = RxMessage.data[8].ToString();
+                    tbPMVolt.Text = (RxMessage.data[9] + (RxMessage.data[10] << 8)).ToString();
+                    tbPMCurrent.Text = RxMessage.data[11].ToString();
+                    tbPMFreq.Text = RxMessage.data[12].ToString();
+                    break;
+                case 0x2F: //Firmware ACK
+                        Console.WriteLine("MSGCMD_RESPONSE_FW_ACK 0x2FU");
+                    byte[] tmpPayload = new byte[192 + 2];
+                    int fwSeqNum = ((RxMessage.data[0] & 0x7F) << 8) + RxMessage.data[1] + 1;
+                    if (fwSeqNum == firmwarePacket.GetLength(0))
+                    {
+                        debugText.AppendText("\r\nEND\r\n");
+                    }
+                    else if (fwSeqNum < firmwarePacket.GetLength(0))
+                    { 
+                        for (int fwByteIndex = 0; fwByteIndex < 194; fwByteIndex++)
+                        {
+                            tmpPayload[fwByteIndex] = firmwarePacket[fwSeqNum, fwByteIndex];
+                        }
+                        SendPacket(0x1f, tmpPayload);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrone Num : %d", fwSeqNum);
+                    }
                     break;
                 default:
+                    Console.WriteLine("None");
                     break;
             }
         }
@@ -454,6 +619,7 @@ namespace IOBoard
             return "";
         }
 
+        byte[,] firmwarePacket;
         private void BtnFileSendSend_Click(object sender, EventArgs e)
         {
             try
@@ -464,23 +630,50 @@ namespace IOBoard
                 byte[] tmpFwData = new byte[192];
                 byte[] tmpPayload = new byte[192 + 2];
 
+                //if (serialPort.IsOpen)
+                //{
+                //    debugText.AppendText("전송 중 ");
+                //    for (Int32 i = 0; i < FwTotalNo; i++)
+                //    {
+                //        fs.Read(tmpFwData, 0, 192);
+                //        Array.Copy(tmpFwData, 0, tmpPayload, 2, 192);
+                //        tmpPayload[0] = (byte)((i >> 8) & 0xFF);
+                //        tmpPayload[1] = (byte)(i  & 0xFF);
+                //        SendPacket(0x1f, tmpPayload);
+                //
+                //        if (i % 5 == 0)
+                //        {
+                //            debugText.AppendText(".");
+                //        }
+                //    }
+                //    debugText.AppendText(" 끝\r\n");
+                //}
+                //else
+                //{
+                //    debugText.AppendText("통신포트를 먼저 연결하세요.\r\n");
+                //}
+
+                firmwarePacket = new byte[FwTotalNo, 194];
                 if (serialPort.IsOpen)
                 {
-                    debugText.AppendText("전송 중 ");
+                    debugText.AppendText("패킷 생성");
                     for (Int32 i = 0; i < FwTotalNo; i++)
                     {
                         fs.Read(tmpFwData, 0, 192);
-                        Array.Copy(tmpFwData, 0, tmpPayload, 2, 192);
-                        tmpPayload[0] = (byte)((i >> 8) & 0xFF);
-                        tmpPayload[1] = (byte)(i  & 0xFF);
-                        SendPacket(0x1f, tmpPayload);
-
-                        if (i % 5 == 0)
+                        for(int fwByteIndex=0; fwByteIndex<192; fwByteIndex++)
                         {
-                            debugText.AppendText(".");
+                            firmwarePacket[i, fwByteIndex + 2] = tmpFwData[fwByteIndex];
                         }
+                        firmwarePacket[i,0] = (byte)((i >> 8) & 0xFF);
+                        firmwarePacket[i,1] = (byte)(i  & 0xFF);
                     }
-                    debugText.AppendText(" 끝\r\n");
+                    firmwarePacket[FwTotalNo - 1, 0] |= 0x80; /* 마지막 패킷은 순번의 최상위 비트 SET */
+
+                    for (int fwByteIndex = 0; fwByteIndex < 194; fwByteIndex++)
+                    {
+                        tmpPayload[fwByteIndex] = firmwarePacket[0, fwByteIndex];
+                    }
+                    SendPacket(0x1f, tmpPayload);
                 }
                 else
                 {
@@ -500,7 +693,20 @@ namespace IOBoard
 
         private void btnUpdateConfig_Click(object sender, EventArgs e)
         {
-            byte[] tmpPayload = new byte[0];
+            byte[] tmpPayload = new byte[13];
+            tmpPayload[0] = (byte)Convert.ToInt32(tbDO0.Text);
+            tmpPayload[1] = (byte)Convert.ToInt32(tbDO1.Text);
+            tmpPayload[2] = (byte)Convert.ToInt32(tbRTDCycle.Text);
+            tmpPayload[3] = (byte)Convert.ToInt32(tbAICycle.Text);
+            tmpPayload[4] = (byte)Convert.ToInt32(tbDICycle.Text);
+            tmpPayload[5] = (byte)Convert.ToInt32(tbDPSCycle.Text);
+            tmpPayload[6] = (byte)Convert.ToInt32(tbPSCycle.Text);
+            tmpPayload[7] = (byte)Convert.ToInt32(tbPMMode.Text);
+            tmpPayload[8] = (byte)Convert.ToInt32(tbPMCycle.Text);
+            tmpPayload[9] = (byte)Convert.ToInt32(tbPMVolt.Text);
+            tmpPayload[10] = (byte)(Convert.ToInt32(tbPMVolt.Text) >> 8);
+            tmpPayload[11] = (byte)Convert.ToInt32(tbPMCurrent.Text);
+            tmpPayload[12] = (byte)Convert.ToInt32(tbPMFreq.Text);
             SendPacket(0x12, tmpPayload);
         }
 
@@ -546,11 +752,45 @@ namespace IOBoard
             if(panel_config.Visible == true)
             {
                 panel_config.Visible = false;
+                btnSetConfig.BackColor = Color.Gainsboro;
             }
             else
             {
                 panel_config.Visible = true;
+                btnSetConfig.BackColor = Color.Green;
+
+                panel_status.Visible = false;
+                btnViewStatusValue.BackColor = Color.Gainsboro;
             }
+        }
+
+        private void btnViewStatusValue_Click(object sender, EventArgs e)
+        {
+            if (panel_status.Visible == true)
+            {
+                panel_status.Visible = false;
+                btnViewStatusValue.BackColor = Color.Gainsboro;
+            }
+            else
+            {
+                panel_status.Visible = true;
+                btnViewStatusValue.BackColor = Color.Green;
+
+                panel_config.Visible = false;
+                btnSetConfig.BackColor = Color.Gainsboro;
+            }
+        }
+
+        private void timer_1s_interrupt(object sender, EventArgs e)
+        {
+            //ProcessMessage();
+        }
+
+        private void debugHex_Enter(object sender, EventArgs e)
+        {
+            //debugHex.SelectionStart = debugHex.Text.Length;
+
+    debugHex.ScrollToCaret();
         }
     }
 

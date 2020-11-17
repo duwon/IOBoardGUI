@@ -308,12 +308,16 @@ namespace IOBoard
             SendData(txPacket);
         }
 
+        bool flag_viewSendData = true;
         private void SendData(byte[] txData)
         {
             try
             {
                 serialPort.Write(txData, 0, txData.Length);
-                debugHex.AppendText(DateTime.Now.ToString("\r\n[HH:mm:ss] [TX] ") + BitConverter.ToString(txData).Replace("-", " "));
+                if (flag_viewSendData)
+                {
+                    debugHex.AppendText(DateTime.Now.ToString("\r\n[HH:mm:ss] [TX] ") + BitConverter.ToString(txData).Replace("-", " "));
+                }
             }
             catch (System.Exception ex)
             {
@@ -360,8 +364,11 @@ namespace IOBoard
                         serialPort.Read(buff, 0, iRecivedSize);
                         this.Invoke(new Action(delegate ()
                         {
-                            debugHex.AppendText(DateTime.Now.ToString("\r\n[HH:mm:ss] [RX] ") + BitConverter.ToString(buff).Replace("-", " "));
-                            debugText.AppendText(ConvertHexToString(BitConverter.ToString(buff).Replace("-", "")));
+                            if (flag_viewSendData)
+                            {
+                                debugHex.AppendText(DateTime.Now.ToString("\r\n[HH:mm:ss] [RX] ") + BitConverter.ToString(buff).Replace("-", " "));
+                                debugText.AppendText(ConvertHexToString(BitConverter.ToString(buff).Replace("-", "")));
+                            }
                         }));
 
                         for (int i = 0; i < iRecivedSize; i++)
@@ -467,6 +474,7 @@ namespace IOBoard
             }
         }
 
+        int fwSeqNumLast = 10;
         private void ParsingMessage()
         {
             switch (RxMessage.type)
@@ -495,13 +503,16 @@ namespace IOBoard
                     stIOStatus.Do[0] = RxMessage.data[42];
                     stIOStatus.Do[1] = RxMessage.data[43];
 
-                    tbDI0.Text = stIOStatus.Di[0].ToString();
-                    tbDI1.Text = stIOStatus.Di[1].ToString();
-                    tbDI2.Text = stIOStatus.Di[2].ToString();
-                    tbDI3.Text = stIOStatus.Di[3].ToString();
+                    this.Invoke(new Action(delegate ()
+                    {
+                        tbDI0.Text = stIOStatus.Di[0].ToString();
+                        tbDI1.Text = stIOStatus.Di[1].ToString();
+                        tbDI2.Text = stIOStatus.Di[2].ToString();
+                        tbDI3.Text = stIOStatus.Di[3].ToString();
 
-                    tbDO0Value.Text = stIOStatus.Do[0].ToString();
-                    tbDO1Value.Text = stIOStatus.Do[1].ToString();
+                        tbDO0Value.Text = stIOStatus.Do[0].ToString();
+                        tbDO1Value.Text = stIOStatus.Do[1].ToString();
+                    }));
                     break;
                 case 0x21: //MSGCMD_RESPONSE_TIME 0x21U
                     Console.WriteLine("MSGCMD_RESPONSE_TIME 0x21U");
@@ -530,6 +541,7 @@ namespace IOBoard
                     }));
                     break;
                 case 0x2F: //Firmware ACK
+                    flag_viewSendData = false;
                     Console.WriteLine("MSGCMD_RESPONSE_FW_ACK 0x2FU");
                     byte[] tmpPayload = new byte[192 + 2];
                     int fwSeqNum = ((RxMessage.data[0] & 0x7F) << 8) + RxMessage.data[1] + 1;
@@ -537,7 +549,8 @@ namespace IOBoard
                     {
                         this.Invoke(new Action(delegate ()
                         {
-                            debugText.AppendText("\r\nEND\r\n");
+                            debugText.AppendText(" 100%  END\r\n");
+                            flag_viewSendData = true;
                         }));
                     }
                     else if (fwSeqNum < firmwarePacket.GetLength(0))
@@ -547,6 +560,15 @@ namespace IOBoard
                             tmpPayload[fwByteIndex] = firmwarePacket[fwSeqNum, fwByteIndex];
                         }
                         SendPacket(0x1f, tmpPayload);
+
+                        if((fwSeqNum % (firmwarePacket.GetLength(0) / 10)) == 0)
+                        {
+                            this.Invoke(new Action(delegate ()
+                            {
+                                debugText.AppendText((fwSeqNum * 100 / firmwarePacket.GetLength(0)).ToString() + "% ");
+                            }));
+                            //fwSeqNumLast += 10;
+                        }
                     }
                     else
                     {

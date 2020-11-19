@@ -104,6 +104,8 @@
             this.timer1s = new System.Windows.Forms.Timer(this.components);
             this.btn_DO1 = new System.Windows.Forms.Button();
             this.btn_DO2 = new System.Windows.Forms.Button();
+            this.btnTest1 = new System.Windows.Forms.Button();
+            this.btnTest2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -892,11 +894,33 @@
             this.btn_DO2.UseVisualStyleBackColor = true;
             this.btn_DO2.Click += new System.EventHandler(this.btn_DO_Click);
             // 
+            // btnTest1
+            // 
+            this.btnTest1.Location = new System.Drawing.Point(114, 246);
+            this.btnTest1.Name = "btnTest1";
+            this.btnTest1.Size = new System.Drawing.Size(90, 44);
+            this.btnTest1.TabIndex = 47;
+            this.btnTest1.Text = "테스트1 0xD1";
+            this.btnTest1.UseVisualStyleBackColor = true;
+            this.btnTest1.Click += new System.EventHandler(this.BtnTest1_Click);
+            // 
+            // btnTest2
+            // 
+            this.btnTest2.Location = new System.Drawing.Point(220, 246);
+            this.btnTest2.Name = "btnTest2";
+            this.btnTest2.Size = new System.Drawing.Size(90, 44);
+            this.btnTest2.TabIndex = 48;
+            this.btnTest2.Text = "테스트2 0xD2";
+            this.btnTest2.UseVisualStyleBackColor = true;
+            this.btnTest2.Click += new System.EventHandler(this.BtnTest2_Click);
+            // 
             // IOBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1540, 747);
+            this.Controls.Add(this.btnTest2);
+            this.Controls.Add(this.btnTest1);
             this.Controls.Add(this.btn_DO2);
             this.Controls.Add(this.btn_DO1);
             this.Controls.Add(this.panel_status);
@@ -1013,5 +1037,7 @@
         private System.Windows.Forms.Timer timer1s;
         private System.Windows.Forms.Button btn_DO1;
         private System.Windows.Forms.Button btn_DO2;
+        private System.Windows.Forms.Button btnTest1;
+        private System.Windows.Forms.Button btnTest2;
     }
 }

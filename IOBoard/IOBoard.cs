@@ -847,6 +847,18 @@ namespace IOBoard
             }
             SendPacket(0x15, tmpPayload);
         }
+
+        private void BtnTest1_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[0];
+            SendPacket(0xd1, tmpPayload);
+        }
+
+        private void BtnTest2_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[0];
+            SendPacket(0xd2, tmpPayload);
+        }
     }
 
 

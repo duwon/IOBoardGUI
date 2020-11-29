@@ -48,6 +48,9 @@
             this.btnRequestWattMeterValue = new System.Windows.Forms.Button();
             this.btnRequestReset = new System.Windows.Forms.Button();
             this.panel_config = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.tbDO1 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -58,8 +61,6 @@
             this.tbPMVolt = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbPMCycle = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbPMMode = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbPSCycle = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -72,10 +73,15 @@
             this.tbRTDCycle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbDO0 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnSetConfig = new System.Windows.Forms.Button();
             this.lbBoardTime = new System.Windows.Forms.Label();
             this.btnViewStatusValue = new System.Windows.Forms.Button();
             this.panel_status = new System.Windows.Forms.Panel();
+            this.btnRequestStatus = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.tbDO1Value = new System.Windows.Forms.TextBox();
@@ -106,6 +112,71 @@
             this.btn_DO2 = new System.Windows.Forms.Button();
             this.btnTest1 = new System.Windows.Forms.Button();
             this.btnTest2 = new System.Windows.Forms.Button();
+            this.tbSPIWriteReg0 = new System.Windows.Forms.TextBox();
+            this.tbSPIWriteData0 = new System.Windows.Forms.TextBox();
+            this.btnSPIWrite0 = new System.Windows.Forms.Button();
+            this.btnSPIRead0 = new System.Windows.Forms.Button();
+            this.tbSPIReadReg0 = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label31 = new System.Windows.Forms.Label();
+            this.tbReg1FData0 = new System.Windows.Forms.TextBox();
+            this.btnReg1FWrite = new System.Windows.Forms.Button();
+            this.tbReg1FData2 = new System.Windows.Forms.TextBox();
+            this.tbReg1FData1 = new System.Windows.Forms.TextBox();
+            this.btnRegRead8 = new System.Windows.Forms.Button();
+            this.btnRegWrite8 = new System.Windows.Forms.Button();
+            this.btnRegRead7 = new System.Windows.Forms.Button();
+            this.btnRegWrite7 = new System.Windows.Forms.Button();
+            this.btnRegRead6 = new System.Windows.Forms.Button();
+            this.btnRegWrite6 = new System.Windows.Forms.Button();
+            this.btnRegRead5 = new System.Windows.Forms.Button();
+            this.btnRegWrite5 = new System.Windows.Forms.Button();
+            this.btnRegRead4 = new System.Windows.Forms.Button();
+            this.btnRegWrite4 = new System.Windows.Forms.Button();
+            this.btnRegRead3 = new System.Windows.Forms.Button();
+            this.btnRegWrite3 = new System.Windows.Forms.Button();
+            this.btnRegRead2 = new System.Windows.Forms.Button();
+            this.btnRegWrite2 = new System.Windows.Forms.Button();
+            this.btnRegRead1 = new System.Windows.Forms.Button();
+            this.btnRegWrite1 = new System.Windows.Forms.Button();
+            this.label29 = new System.Windows.Forms.Label();
+            this.tbWriteRegData8 = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tbWriteRegData7 = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tbWriteRegData6 = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.tbWriteRegData5 = new System.Windows.Forms.TextBox();
+            this.btnRegRead0 = new System.Windows.Forms.Button();
+            this.btnRegWrite0 = new System.Windows.Forms.Button();
+            this.btnSPIWrite4 = new System.Windows.Forms.Button();
+            this.tbSPIWriteData4 = new System.Windows.Forms.TextBox();
+            this.tbSPIWriteReg4 = new System.Windows.Forms.TextBox();
+            this.btnSPIRead3 = new System.Windows.Forms.Button();
+            this.tbSPIReadReg3 = new System.Windows.Forms.TextBox();
+            this.btnSPIWrite3 = new System.Windows.Forms.Button();
+            this.tbSPIWriteData3 = new System.Windows.Forms.TextBox();
+            this.tbSPIWriteReg3 = new System.Windows.Forms.TextBox();
+            this.btnSPIRead2 = new System.Windows.Forms.Button();
+            this.tbSPIReadReg2 = new System.Windows.Forms.TextBox();
+            this.btnSPIWrite2 = new System.Windows.Forms.Button();
+            this.tbSPIWriteData2 = new System.Windows.Forms.TextBox();
+            this.tbSPIWriteReg2 = new System.Windows.Forms.TextBox();
+            this.btnSPIRead1 = new System.Windows.Forms.Button();
+            this.tbSPIReadReg1 = new System.Windows.Forms.TextBox();
+            this.btnSPIWrite1 = new System.Windows.Forms.Button();
+            this.tbSPIWriteData1 = new System.Windows.Forms.TextBox();
+            this.tbSPIWriteReg1 = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.tbWriteRegData1 = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tbWriteRegData4 = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.tbWriteRegData3 = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.tbWriteRegData2 = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.tbWriteRegData0 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -113,6 +184,7 @@
             this.splitContainer1.SuspendLayout();
             this.panel_config.SuspendLayout();
             this.panel_status.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPort
@@ -312,6 +384,9 @@
             // 
             // panel_config
             // 
+            this.panel_config.Controls.Add(this.button7);
+            this.panel_config.Controls.Add(this.button6);
+            this.panel_config.Controls.Add(this.button4);
             this.panel_config.Controls.Add(this.label7);
             this.panel_config.Controls.Add(this.tbDO1);
             this.panel_config.Controls.Add(this.label8);
@@ -322,8 +397,6 @@
             this.panel_config.Controls.Add(this.tbPMVolt);
             this.panel_config.Controls.Add(this.label11);
             this.panel_config.Controls.Add(this.tbPMCycle);
-            this.panel_config.Controls.Add(this.label12);
-            this.panel_config.Controls.Add(this.tbPMMode);
             this.panel_config.Controls.Add(this.label6);
             this.panel_config.Controls.Add(this.tbPSCycle);
             this.panel_config.Controls.Add(this.label5);
@@ -340,6 +413,36 @@
             this.panel_config.Name = "panel_config";
             this.panel_config.Size = new System.Drawing.Size(667, 296);
             this.panel_config.TabIndex = 26;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(552, 210);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(82, 22);
+            this.button7.TabIndex = 57;
+            this.button7.Text = "CH2 0x24";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(552, 182);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(82, 22);
+            this.button6.TabIndex = 56;
+            this.button6.Text = "CH1 0x22";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(552, 154);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(82, 22);
+            this.button4.TabIndex = 54;
+            this.button4.Text = "CH0 0x20";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // label7
             // 
@@ -366,9 +469,9 @@
             this.label8.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label8.Location = new System.Drawing.Point(276, 185);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 15);
+            this.label8.Size = new System.Drawing.Size(47, 15);
             this.label8.TabIndex = 23;
-            this.label8.Text = "PM Freq";
+            this.label8.Text = "PM Hz";
             // 
             // tbPMFreq
             // 
@@ -434,26 +537,7 @@
             this.tbPMCycle.Name = "tbPMCycle";
             this.tbPMCycle.Size = new System.Drawing.Size(77, 22);
             this.tbPMCycle.TabIndex = 16;
-            this.tbPMCycle.Text = "60";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label12.Location = new System.Drawing.Point(276, 61);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(68, 15);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "PM Mode";
-            // 
-            // tbPMMode
-            // 
-            this.tbPMMode.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbPMMode.Location = new System.Drawing.Point(358, 58);
-            this.tbPMMode.Name = "tbPMMode";
-            this.tbPMMode.Size = new System.Drawing.Size(77, 22);
-            this.tbPMMode.TabIndex = 14;
-            this.tbPMMode.Text = "1";
+            this.tbPMCycle.Text = "15";
             // 
             // label6
             // 
@@ -548,7 +632,7 @@
             this.tbRTDCycle.Name = "tbRTDCycle";
             this.tbRTDCycle.Size = new System.Drawing.Size(77, 22);
             this.tbRTDCycle.TabIndex = 2;
-            this.tbRTDCycle.Text = "10";
+            this.tbRTDCycle.Text = "60";
             // 
             // label1
             // 
@@ -568,6 +652,46 @@
             this.tbDO0.Size = new System.Drawing.Size(77, 22);
             this.tbDO0.TabIndex = 0;
             this.tbDO0.Text = "0";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(575, 15);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(82, 22);
+            this.button3.TabIndex = 53;
+            this.button3.Text = "Re Conv.";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(575, 98);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(82, 22);
+            this.button5.TabIndex = 55;
+            this.button5.Text = "Status 0x1E";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(575, 69);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(82, 22);
+            this.button2.TabIndex = 52;
+            this.button2.Text = "Data 0x1A";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(575, 42);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(82, 22);
+            this.button1.TabIndex = 51;
+            this.button1.Text = "Done 0x18";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // btnSetConfig
             // 
@@ -600,6 +724,7 @@
             // 
             // panel_status
             // 
+            this.panel_status.Controls.Add(this.btnRequestStatus);
             this.panel_status.Controls.Add(this.label25);
             this.panel_status.Controls.Add(this.label13);
             this.panel_status.Controls.Add(this.tbDO1Value);
@@ -629,6 +754,16 @@
             this.panel_status.Name = "panel_status";
             this.panel_status.Size = new System.Drawing.Size(667, 296);
             this.panel_status.TabIndex = 27;
+            // 
+            // btnRequestStatus
+            // 
+            this.btnRequestStatus.Location = new System.Drawing.Point(528, 27);
+            this.btnRequestStatus.Name = "btnRequestStatus";
+            this.btnRequestStatus.Size = new System.Drawing.Size(89, 61);
+            this.btnRequestStatus.TabIndex = 51;
+            this.btnRequestStatus.Text = "Read";
+            this.btnRequestStatus.UseVisualStyleBackColor = true;
+            this.btnRequestStatus.Click += new System.EventHandler(this.BtnRequestStatus_Click);
             // 
             // label25
             // 
@@ -914,6 +1049,696 @@
             this.btnTest2.UseVisualStyleBackColor = true;
             this.btnTest2.Click += new System.EventHandler(this.BtnTest2_Click);
             // 
+            // tbSPIWriteReg0
+            // 
+            this.tbSPIWriteReg0.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteReg0.Location = new System.Drawing.Point(302, 13);
+            this.tbSPIWriteReg0.Name = "tbSPIWriteReg0";
+            this.tbSPIWriteReg0.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteReg0.TabIndex = 26;
+            this.tbSPIWriteReg0.Text = "00";
+            // 
+            // tbSPIWriteData0
+            // 
+            this.tbSPIWriteData0.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteData0.Location = new System.Drawing.Point(353, 13);
+            this.tbSPIWriteData0.Name = "tbSPIWriteData0";
+            this.tbSPIWriteData0.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteData0.TabIndex = 27;
+            this.tbSPIWriteData0.Text = "C3";
+            // 
+            // btnSPIWrite0
+            // 
+            this.btnSPIWrite0.Location = new System.Drawing.Point(408, 13);
+            this.btnSPIWrite0.Name = "btnSPIWrite0";
+            this.btnSPIWrite0.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIWrite0.TabIndex = 48;
+            this.btnSPIWrite0.Text = "Write";
+            this.btnSPIWrite0.UseVisualStyleBackColor = true;
+            this.btnSPIWrite0.Click += new System.EventHandler(this.btnSPIWrite_Clicked);
+            // 
+            // btnSPIRead0
+            // 
+            this.btnSPIRead0.Location = new System.Drawing.Point(519, 42);
+            this.btnSPIRead0.Name = "btnSPIRead0";
+            this.btnSPIRead0.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIRead0.TabIndex = 50;
+            this.btnSPIRead0.Text = "Read";
+            this.btnSPIRead0.UseVisualStyleBackColor = true;
+            this.btnSPIRead0.Click += new System.EventHandler(this.btnSPIRead_Clicked);
+            // 
+            // tbSPIReadReg0
+            // 
+            this.tbSPIReadReg0.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIReadReg0.Location = new System.Drawing.Point(474, 42);
+            this.tbSPIReadReg0.Name = "tbSPIReadReg0";
+            this.tbSPIReadReg0.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIReadReg0.TabIndex = 49;
+            this.tbSPIReadReg0.Text = "18";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label31);
+            this.panel2.Controls.Add(this.tbReg1FData0);
+            this.panel2.Controls.Add(this.btnReg1FWrite);
+            this.panel2.Controls.Add(this.tbReg1FData2);
+            this.panel2.Controls.Add(this.tbReg1FData1);
+            this.panel2.Controls.Add(this.btnRegRead8);
+            this.panel2.Controls.Add(this.btnRegWrite8);
+            this.panel2.Controls.Add(this.btnRegRead7);
+            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.btnRegWrite7);
+            this.panel2.Controls.Add(this.btnRegRead6);
+            this.panel2.Controls.Add(this.btnRegWrite6);
+            this.panel2.Controls.Add(this.btnRegRead5);
+            this.panel2.Controls.Add(this.btnRegWrite5);
+            this.panel2.Controls.Add(this.btnRegRead4);
+            this.panel2.Controls.Add(this.btnRegWrite4);
+            this.panel2.Controls.Add(this.btnRegRead3);
+            this.panel2.Controls.Add(this.btnRegWrite3);
+            this.panel2.Controls.Add(this.btnRegRead2);
+            this.panel2.Controls.Add(this.btnRegWrite2);
+            this.panel2.Controls.Add(this.btnRegRead1);
+            this.panel2.Controls.Add(this.btnRegWrite1);
+            this.panel2.Controls.Add(this.label29);
+            this.panel2.Controls.Add(this.tbWriteRegData8);
+            this.panel2.Controls.Add(this.label30);
+            this.panel2.Controls.Add(this.tbWriteRegData7);
+            this.panel2.Controls.Add(this.label27);
+            this.panel2.Controls.Add(this.tbWriteRegData6);
+            this.panel2.Controls.Add(this.label28);
+            this.panel2.Controls.Add(this.tbWriteRegData5);
+            this.panel2.Controls.Add(this.btnRegRead0);
+            this.panel2.Controls.Add(this.btnRegWrite0);
+            this.panel2.Controls.Add(this.button5);
+            this.panel2.Controls.Add(this.btnSPIWrite4);
+            this.panel2.Controls.Add(this.tbSPIWriteData4);
+            this.panel2.Controls.Add(this.tbSPIWriteReg4);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.btnSPIRead3);
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.tbSPIReadReg3);
+            this.panel2.Controls.Add(this.btnSPIWrite3);
+            this.panel2.Controls.Add(this.tbSPIWriteData3);
+            this.panel2.Controls.Add(this.tbSPIWriteReg3);
+            this.panel2.Controls.Add(this.btnSPIRead2);
+            this.panel2.Controls.Add(this.tbSPIReadReg2);
+            this.panel2.Controls.Add(this.btnSPIWrite2);
+            this.panel2.Controls.Add(this.tbSPIWriteData2);
+            this.panel2.Controls.Add(this.tbSPIWriteReg2);
+            this.panel2.Controls.Add(this.btnSPIRead1);
+            this.panel2.Controls.Add(this.tbSPIReadReg1);
+            this.panel2.Controls.Add(this.btnSPIWrite1);
+            this.panel2.Controls.Add(this.tbSPIWriteData1);
+            this.panel2.Controls.Add(this.tbSPIWriteReg1);
+            this.panel2.Controls.Add(this.label26);
+            this.panel2.Controls.Add(this.tbWriteRegData1);
+            this.panel2.Controls.Add(this.btnSPIRead0);
+            this.panel2.Controls.Add(this.tbSPIReadReg0);
+            this.panel2.Controls.Add(this.btnSPIWrite0);
+            this.panel2.Controls.Add(this.tbSPIWriteData0);
+            this.panel2.Controls.Add(this.tbSPIWriteReg0);
+            this.panel2.Controls.Add(this.label34);
+            this.panel2.Controls.Add(this.tbWriteRegData4);
+            this.panel2.Controls.Add(this.label35);
+            this.panel2.Controls.Add(this.tbWriteRegData3);
+            this.panel2.Controls.Add(this.label36);
+            this.panel2.Controls.Add(this.tbWriteRegData2);
+            this.panel2.Controls.Add(this.label37);
+            this.panel2.Controls.Add(this.tbWriteRegData0);
+            this.panel2.Location = new System.Drawing.Point(317, 4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(667, 296);
+            this.panel2.TabIndex = 49;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label31.Location = new System.Drawing.Point(365, 181);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(129, 15);
+            this.label31.TabIndex = 104;
+            this.label31.Text = "[7:6]    [5:3]    [2:0]";
+            // 
+            // tbReg1FData0
+            // 
+            this.tbReg1FData0.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbReg1FData0.Location = new System.Drawing.Point(368, 199);
+            this.tbReg1FData0.Name = "tbReg1FData0";
+            this.tbReg1FData0.Size = new System.Drawing.Size(39, 22);
+            this.tbReg1FData0.TabIndex = 103;
+            this.tbReg1FData0.Text = "1";
+            // 
+            // btnReg1FWrite
+            // 
+            this.btnReg1FWrite.Location = new System.Drawing.Point(503, 199);
+            this.btnReg1FWrite.Name = "btnReg1FWrite";
+            this.btnReg1FWrite.Size = new System.Drawing.Size(50, 22);
+            this.btnReg1FWrite.TabIndex = 102;
+            this.btnReg1FWrite.Text = "0x1F";
+            this.btnReg1FWrite.UseVisualStyleBackColor = true;
+            this.btnReg1FWrite.Click += new System.EventHandler(this.BtnReg1FWrite_Click);
+            // 
+            // tbReg1FData2
+            // 
+            this.tbReg1FData2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbReg1FData2.Location = new System.Drawing.Point(458, 199);
+            this.tbReg1FData2.Name = "tbReg1FData2";
+            this.tbReg1FData2.Size = new System.Drawing.Size(39, 22);
+            this.tbReg1FData2.TabIndex = 101;
+            this.tbReg1FData2.Text = "1";
+            // 
+            // tbReg1FData1
+            // 
+            this.tbReg1FData1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbReg1FData1.Location = new System.Drawing.Point(413, 199);
+            this.tbReg1FData1.Name = "tbReg1FData1";
+            this.tbReg1FData1.Size = new System.Drawing.Size(39, 22);
+            this.tbReg1FData1.TabIndex = 100;
+            this.tbReg1FData1.Text = "1";
+            // 
+            // btnRegRead8
+            // 
+            this.btnRegRead8.Location = new System.Drawing.Point(230, 237);
+            this.btnRegRead8.Name = "btnRegRead8";
+            this.btnRegRead8.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead8.TabIndex = 99;
+            this.btnRegRead8.Text = "Read";
+            this.btnRegRead8.UseVisualStyleBackColor = true;
+            this.btnRegRead8.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite8
+            // 
+            this.btnRegWrite8.Location = new System.Drawing.Point(174, 237);
+            this.btnRegWrite8.Name = "btnRegWrite8";
+            this.btnRegWrite8.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite8.TabIndex = 98;
+            this.btnRegWrite8.Text = "Write";
+            this.btnRegWrite8.UseVisualStyleBackColor = true;
+            this.btnRegWrite8.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnRegRead7
+            // 
+            this.btnRegRead7.Location = new System.Drawing.Point(230, 209);
+            this.btnRegRead7.Name = "btnRegRead7";
+            this.btnRegRead7.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead7.TabIndex = 97;
+            this.btnRegRead7.Text = "Read";
+            this.btnRegRead7.UseVisualStyleBackColor = true;
+            this.btnRegRead7.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite7
+            // 
+            this.btnRegWrite7.Location = new System.Drawing.Point(174, 209);
+            this.btnRegWrite7.Name = "btnRegWrite7";
+            this.btnRegWrite7.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite7.TabIndex = 96;
+            this.btnRegWrite7.Text = "Write";
+            this.btnRegWrite7.UseVisualStyleBackColor = true;
+            this.btnRegWrite7.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnRegRead6
+            // 
+            this.btnRegRead6.Location = new System.Drawing.Point(230, 181);
+            this.btnRegRead6.Name = "btnRegRead6";
+            this.btnRegRead6.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead6.TabIndex = 95;
+            this.btnRegRead6.Text = "Read";
+            this.btnRegRead6.UseVisualStyleBackColor = true;
+            this.btnRegRead6.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite6
+            // 
+            this.btnRegWrite6.Location = new System.Drawing.Point(174, 181);
+            this.btnRegWrite6.Name = "btnRegWrite6";
+            this.btnRegWrite6.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite6.TabIndex = 94;
+            this.btnRegWrite6.Text = "Write";
+            this.btnRegWrite6.UseVisualStyleBackColor = true;
+            this.btnRegWrite6.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnRegRead5
+            // 
+            this.btnRegRead5.Location = new System.Drawing.Point(230, 154);
+            this.btnRegRead5.Name = "btnRegRead5";
+            this.btnRegRead5.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead5.TabIndex = 93;
+            this.btnRegRead5.Text = "Read";
+            this.btnRegRead5.UseVisualStyleBackColor = true;
+            this.btnRegRead5.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite5
+            // 
+            this.btnRegWrite5.Location = new System.Drawing.Point(174, 154);
+            this.btnRegWrite5.Name = "btnRegWrite5";
+            this.btnRegWrite5.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite5.TabIndex = 92;
+            this.btnRegWrite5.Text = "Write";
+            this.btnRegWrite5.UseVisualStyleBackColor = true;
+            this.btnRegWrite5.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnRegRead4
+            // 
+            this.btnRegRead4.Location = new System.Drawing.Point(230, 126);
+            this.btnRegRead4.Name = "btnRegRead4";
+            this.btnRegRead4.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead4.TabIndex = 91;
+            this.btnRegRead4.Text = "Read";
+            this.btnRegRead4.UseVisualStyleBackColor = true;
+            this.btnRegRead4.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite4
+            // 
+            this.btnRegWrite4.Location = new System.Drawing.Point(174, 126);
+            this.btnRegWrite4.Name = "btnRegWrite4";
+            this.btnRegWrite4.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite4.TabIndex = 90;
+            this.btnRegWrite4.Text = "Write";
+            this.btnRegWrite4.UseVisualStyleBackColor = true;
+            this.btnRegWrite4.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnRegRead3
+            // 
+            this.btnRegRead3.Location = new System.Drawing.Point(230, 98);
+            this.btnRegRead3.Name = "btnRegRead3";
+            this.btnRegRead3.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead3.TabIndex = 89;
+            this.btnRegRead3.Text = "Read";
+            this.btnRegRead3.UseVisualStyleBackColor = true;
+            this.btnRegRead3.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite3
+            // 
+            this.btnRegWrite3.Location = new System.Drawing.Point(174, 98);
+            this.btnRegWrite3.Name = "btnRegWrite3";
+            this.btnRegWrite3.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite3.TabIndex = 88;
+            this.btnRegWrite3.Text = "Write";
+            this.btnRegWrite3.UseVisualStyleBackColor = true;
+            this.btnRegWrite3.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnRegRead2
+            // 
+            this.btnRegRead2.Location = new System.Drawing.Point(230, 70);
+            this.btnRegRead2.Name = "btnRegRead2";
+            this.btnRegRead2.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead2.TabIndex = 87;
+            this.btnRegRead2.Text = "Read";
+            this.btnRegRead2.UseVisualStyleBackColor = true;
+            this.btnRegRead2.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite2
+            // 
+            this.btnRegWrite2.Location = new System.Drawing.Point(174, 70);
+            this.btnRegWrite2.Name = "btnRegWrite2";
+            this.btnRegWrite2.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite2.TabIndex = 86;
+            this.btnRegWrite2.Text = "Write";
+            this.btnRegWrite2.UseVisualStyleBackColor = true;
+            this.btnRegWrite2.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnRegRead1
+            // 
+            this.btnRegRead1.Location = new System.Drawing.Point(230, 43);
+            this.btnRegRead1.Name = "btnRegRead1";
+            this.btnRegRead1.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead1.TabIndex = 85;
+            this.btnRegRead1.Text = "Read";
+            this.btnRegRead1.UseVisualStyleBackColor = true;
+            this.btnRegRead1.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite1
+            // 
+            this.btnRegWrite1.Location = new System.Drawing.Point(174, 43);
+            this.btnRegWrite1.Name = "btnRegWrite1";
+            this.btnRegWrite1.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite1.TabIndex = 84;
+            this.btnRegWrite1.Text = "Write";
+            this.btnRegWrite1.UseVisualStyleBackColor = true;
+            this.btnRegWrite1.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label29.Location = new System.Drawing.Point(7, 241);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(113, 15);
+            this.label29.TabIndex = 83;
+            this.label29.Text = "CH2 Config 0x25";
+            // 
+            // tbWriteRegData8
+            // 
+            this.tbWriteRegData8.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData8.Location = new System.Drawing.Point(140, 238);
+            this.tbWriteRegData8.Name = "tbWriteRegData8";
+            this.tbWriteRegData8.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData8.TabIndex = 82;
+            this.tbWriteRegData8.Text = "70";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label30.Location = new System.Drawing.Point(7, 213);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(104, 15);
+            this.label30.TabIndex = 81;
+            this.label30.Text = "CH2 Input 0x24";
+            // 
+            // tbWriteRegData7
+            // 
+            this.tbWriteRegData7.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData7.Location = new System.Drawing.Point(140, 210);
+            this.tbWriteRegData7.Name = "tbWriteRegData7";
+            this.tbWriteRegData7.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData7.TabIndex = 80;
+            this.tbWriteRegData7.Text = "17";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label27.Location = new System.Drawing.Point(7, 185);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(113, 15);
+            this.label27.TabIndex = 79;
+            this.label27.Text = "CH1 Config 0x23";
+            // 
+            // tbWriteRegData6
+            // 
+            this.tbWriteRegData6.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData6.Location = new System.Drawing.Point(140, 182);
+            this.tbWriteRegData6.Name = "tbWriteRegData6";
+            this.tbWriteRegData6.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData6.TabIndex = 78;
+            this.tbWriteRegData6.Text = "70";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label28.Location = new System.Drawing.Point(7, 157);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(104, 15);
+            this.label28.TabIndex = 77;
+            this.label28.Text = "CH1 Input 0x22";
+            // 
+            // tbWriteRegData5
+            // 
+            this.tbWriteRegData5.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData5.Location = new System.Drawing.Point(140, 154);
+            this.tbWriteRegData5.Name = "tbWriteRegData5";
+            this.tbWriteRegData5.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData5.TabIndex = 76;
+            this.tbWriteRegData5.Text = "08";
+            // 
+            // btnRegRead0
+            // 
+            this.btnRegRead0.Location = new System.Drawing.Point(230, 15);
+            this.btnRegRead0.Name = "btnRegRead0";
+            this.btnRegRead0.Size = new System.Drawing.Size(50, 22);
+            this.btnRegRead0.TabIndex = 75;
+            this.btnRegRead0.Text = "Read";
+            this.btnRegRead0.UseVisualStyleBackColor = true;
+            this.btnRegRead0.Click += new System.EventHandler(this.btnRegRead_Clicked);
+            // 
+            // btnRegWrite0
+            // 
+            this.btnRegWrite0.Location = new System.Drawing.Point(174, 15);
+            this.btnRegWrite0.Name = "btnRegWrite0";
+            this.btnRegWrite0.Size = new System.Drawing.Size(50, 22);
+            this.btnRegWrite0.TabIndex = 74;
+            this.btnRegWrite0.Text = "Write";
+            this.btnRegWrite0.UseVisualStyleBackColor = true;
+            this.btnRegWrite0.Click += new System.EventHandler(this.btnRegWrite_Clicked);
+            // 
+            // btnSPIWrite4
+            // 
+            this.btnSPIWrite4.Location = new System.Drawing.Point(408, 125);
+            this.btnSPIWrite4.Name = "btnSPIWrite4";
+            this.btnSPIWrite4.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIWrite4.TabIndex = 68;
+            this.btnSPIWrite4.Text = "Write";
+            this.btnSPIWrite4.UseVisualStyleBackColor = true;
+            this.btnSPIWrite4.Click += new System.EventHandler(this.btnSPIWrite_Clicked);
+            // 
+            // tbSPIWriteData4
+            // 
+            this.tbSPIWriteData4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteData4.Location = new System.Drawing.Point(353, 125);
+            this.tbSPIWriteData4.Name = "tbSPIWriteData4";
+            this.tbSPIWriteData4.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteData4.TabIndex = 67;
+            this.tbSPIWriteData4.Text = "1";
+            // 
+            // tbSPIWriteReg4
+            // 
+            this.tbSPIWriteReg4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteReg4.Location = new System.Drawing.Point(302, 125);
+            this.tbSPIWriteReg4.Name = "tbSPIWriteReg4";
+            this.tbSPIWriteReg4.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteReg4.TabIndex = 66;
+            this.tbSPIWriteReg4.Text = "1";
+            // 
+            // btnSPIRead3
+            // 
+            this.btnSPIRead3.Location = new System.Drawing.Point(519, 126);
+            this.btnSPIRead3.Name = "btnSPIRead3";
+            this.btnSPIRead3.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIRead3.TabIndex = 65;
+            this.btnSPIRead3.Text = "Read";
+            this.btnSPIRead3.UseVisualStyleBackColor = true;
+            this.btnSPIRead3.Click += new System.EventHandler(this.btnSPIRead_Clicked);
+            // 
+            // tbSPIReadReg3
+            // 
+            this.tbSPIReadReg3.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIReadReg3.Location = new System.Drawing.Point(474, 126);
+            this.tbSPIReadReg3.Name = "tbSPIReadReg3";
+            this.tbSPIReadReg3.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIReadReg3.TabIndex = 64;
+            this.tbSPIReadReg3.Text = "1";
+            // 
+            // btnSPIWrite3
+            // 
+            this.btnSPIWrite3.Location = new System.Drawing.Point(408, 97);
+            this.btnSPIWrite3.Name = "btnSPIWrite3";
+            this.btnSPIWrite3.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIWrite3.TabIndex = 63;
+            this.btnSPIWrite3.Text = "Write";
+            this.btnSPIWrite3.UseVisualStyleBackColor = true;
+            this.btnSPIWrite3.Click += new System.EventHandler(this.btnSPIWrite_Clicked);
+            // 
+            // tbSPIWriteData3
+            // 
+            this.tbSPIWriteData3.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteData3.Location = new System.Drawing.Point(353, 97);
+            this.tbSPIWriteData3.Name = "tbSPIWriteData3";
+            this.tbSPIWriteData3.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteData3.TabIndex = 62;
+            this.tbSPIWriteData3.Text = "00";
+            // 
+            // tbSPIWriteReg3
+            // 
+            this.tbSPIWriteReg3.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteReg3.Location = new System.Drawing.Point(302, 97);
+            this.tbSPIWriteReg3.Name = "tbSPIWriteReg3";
+            this.tbSPIWriteReg3.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteReg3.TabIndex = 61;
+            this.tbSPIWriteReg3.Text = "01";
+            // 
+            // btnSPIRead2
+            // 
+            this.btnSPIRead2.Location = new System.Drawing.Point(519, 98);
+            this.btnSPIRead2.Name = "btnSPIRead2";
+            this.btnSPIRead2.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIRead2.TabIndex = 60;
+            this.btnSPIRead2.Text = "Read";
+            this.btnSPIRead2.UseVisualStyleBackColor = true;
+            this.btnSPIRead2.Click += new System.EventHandler(this.btnSPIRead_Clicked);
+            // 
+            // tbSPIReadReg2
+            // 
+            this.tbSPIReadReg2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIReadReg2.Location = new System.Drawing.Point(474, 98);
+            this.tbSPIReadReg2.Name = "tbSPIReadReg2";
+            this.tbSPIReadReg2.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIReadReg2.TabIndex = 59;
+            this.tbSPIReadReg2.Text = "1E";
+            // 
+            // btnSPIWrite2
+            // 
+            this.btnSPIWrite2.Location = new System.Drawing.Point(408, 69);
+            this.btnSPIWrite2.Name = "btnSPIWrite2";
+            this.btnSPIWrite2.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIWrite2.TabIndex = 58;
+            this.btnSPIWrite2.Text = "Write";
+            this.btnSPIWrite2.UseVisualStyleBackColor = true;
+            this.btnSPIWrite2.Click += new System.EventHandler(this.btnSPIWrite_Clicked);
+            // 
+            // tbSPIWriteData2
+            // 
+            this.tbSPIWriteData2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteData2.Location = new System.Drawing.Point(353, 69);
+            this.tbSPIWriteData2.Name = "tbSPIWriteData2";
+            this.tbSPIWriteData2.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteData2.TabIndex = 57;
+            this.tbSPIWriteData2.Text = "A3";
+            // 
+            // tbSPIWriteReg2
+            // 
+            this.tbSPIWriteReg2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteReg2.Location = new System.Drawing.Point(302, 69);
+            this.tbSPIWriteReg2.Name = "tbSPIWriteReg2";
+            this.tbSPIWriteReg2.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteReg2.TabIndex = 56;
+            this.tbSPIWriteReg2.Text = "11";
+            // 
+            // btnSPIRead1
+            // 
+            this.btnSPIRead1.Location = new System.Drawing.Point(519, 70);
+            this.btnSPIRead1.Name = "btnSPIRead1";
+            this.btnSPIRead1.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIRead1.TabIndex = 55;
+            this.btnSPIRead1.Text = "Read";
+            this.btnSPIRead1.UseVisualStyleBackColor = true;
+            this.btnSPIRead1.Click += new System.EventHandler(this.btnSPIRead_Clicked);
+            // 
+            // tbSPIReadReg1
+            // 
+            this.tbSPIReadReg1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIReadReg1.Location = new System.Drawing.Point(474, 70);
+            this.tbSPIReadReg1.Name = "tbSPIReadReg1";
+            this.tbSPIReadReg1.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIReadReg1.TabIndex = 54;
+            this.tbSPIReadReg1.Text = "1A";
+            // 
+            // btnSPIWrite1
+            // 
+            this.btnSPIWrite1.Location = new System.Drawing.Point(408, 41);
+            this.btnSPIWrite1.Name = "btnSPIWrite1";
+            this.btnSPIWrite1.Size = new System.Drawing.Size(50, 22);
+            this.btnSPIWrite1.TabIndex = 53;
+            this.btnSPIWrite1.Text = "Write";
+            this.btnSPIWrite1.UseVisualStyleBackColor = true;
+            this.btnSPIWrite1.Click += new System.EventHandler(this.btnSPIWrite_Clicked);
+            // 
+            // tbSPIWriteData1
+            // 
+            this.tbSPIWriteData1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteData1.Location = new System.Drawing.Point(353, 41);
+            this.tbSPIWriteData1.Name = "tbSPIWriteData1";
+            this.tbSPIWriteData1.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteData1.TabIndex = 52;
+            this.tbSPIWriteData1.Text = "02";
+            // 
+            // tbSPIWriteReg1
+            // 
+            this.tbSPIWriteReg1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbSPIWriteReg1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSPIWriteReg1.Location = new System.Drawing.Point(302, 41);
+            this.tbSPIWriteReg1.Name = "tbSPIWriteReg1";
+            this.tbSPIWriteReg1.Size = new System.Drawing.Size(39, 22);
+            this.tbSPIWriteReg1.TabIndex = 51;
+            this.tbSPIWriteReg1.Text = "10";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label26.Location = new System.Drawing.Point(7, 45);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(111, 15);
+            this.label26.TabIndex = 25;
+            this.label26.Text = "Cal Control 0x17";
+            // 
+            // tbWriteRegData1
+            // 
+            this.tbWriteRegData1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData1.Location = new System.Drawing.Point(140, 42);
+            this.tbWriteRegData1.Name = "tbWriteRegData1";
+            this.tbWriteRegData1.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData1.TabIndex = 24;
+            this.tbWriteRegData1.Text = "0";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label34.Location = new System.Drawing.Point(7, 129);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(113, 15);
+            this.label34.TabIndex = 7;
+            this.label34.Text = "CH0 Config 0x21";
+            // 
+            // tbWriteRegData4
+            // 
+            this.tbWriteRegData4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData4.Location = new System.Drawing.Point(140, 126);
+            this.tbWriteRegData4.Name = "tbWriteRegData4";
+            this.tbWriteRegData4.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData4.TabIndex = 6;
+            this.tbWriteRegData4.Text = "70";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label35.Location = new System.Drawing.Point(7, 101);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(104, 15);
+            this.label35.TabIndex = 5;
+            this.label35.Text = "CH0 Input 0x20";
+            // 
+            // tbWriteRegData3
+            // 
+            this.tbWriteRegData3.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData3.Location = new System.Drawing.Point(140, 98);
+            this.tbWriteRegData3.Name = "tbWriteRegData3";
+            this.tbWriteRegData3.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData3.TabIndex = 4;
+            this.tbWriteRegData3.Text = "41";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label36.Location = new System.Drawing.Point(7, 73);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(131, 15);
+            this.label36.TabIndex = 3;
+            this.label36.Text = "CH Scan Mode 0x1F";
+            // 
+            // tbWriteRegData2
+            // 
+            this.tbWriteRegData2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData2.Location = new System.Drawing.Point(140, 70);
+            this.tbWriteRegData2.Name = "tbWriteRegData2";
+            this.tbWriteRegData2.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData2.TabIndex = 2;
+            this.tbWriteRegData2.Text = "10";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label37.Location = new System.Drawing.Point(7, 17);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(121, 15);
+            this.label37.TabIndex = 1;
+            this.label37.Text = "ADC_AUXCN 0x12";
+            // 
+            // tbWriteRegData0
+            // 
+            this.tbWriteRegData0.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbWriteRegData0.Location = new System.Drawing.Point(140, 14);
+            this.tbWriteRegData0.Name = "tbWriteRegData0";
+            this.tbWriteRegData0.Size = new System.Drawing.Size(28, 22);
+            this.tbWriteRegData0.TabIndex = 0;
+            this.tbWriteRegData0.Text = "0A";
+            // 
             // IOBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -936,9 +1761,10 @@
             this.Controls.Add(this.btnUpdateConfig);
             this.Controls.Add(this.btnRequestIOBoardInfo);
             this.Controls.Add(this.btnFileSendSend);
-            this.Controls.Add(this.panel_sendData);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel_sendData);
             this.Font = new System.Drawing.Font("나눔고딕", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IOBoard";
@@ -957,6 +1783,8 @@
             this.panel_config.PerformLayout();
             this.panel_status.ResumeLayout(false);
             this.panel_status.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -990,8 +1818,6 @@
         private System.Windows.Forms.TextBox tbPMVolt;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbPMCycle;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbPMMode;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbPSCycle;
         private System.Windows.Forms.Label label5;
@@ -1039,5 +1865,78 @@
         private System.Windows.Forms.Button btn_DO2;
         private System.Windows.Forms.Button btnTest1;
         private System.Windows.Forms.Button btnTest2;
+        private System.Windows.Forms.Button btnSPIRead0;
+        private System.Windows.Forms.TextBox tbSPIReadReg0;
+        private System.Windows.Forms.Button btnSPIWrite0;
+        private System.Windows.Forms.TextBox tbSPIWriteData0;
+        private System.Windows.Forms.TextBox tbSPIWriteReg0;
+        private System.Windows.Forms.Button btnRequestStatus;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox tbWriteRegData1;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox tbWriteRegData4;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.TextBox tbWriteRegData3;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox tbWriteRegData2;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox tbWriteRegData0;
+        private System.Windows.Forms.Button btnSPIWrite4;
+        private System.Windows.Forms.TextBox tbSPIWriteData4;
+        private System.Windows.Forms.TextBox tbSPIWriteReg4;
+        private System.Windows.Forms.Button btnSPIRead3;
+        private System.Windows.Forms.TextBox tbSPIReadReg3;
+        private System.Windows.Forms.Button btnSPIWrite3;
+        private System.Windows.Forms.TextBox tbSPIWriteData3;
+        private System.Windows.Forms.TextBox tbSPIWriteReg3;
+        private System.Windows.Forms.Button btnSPIRead2;
+        private System.Windows.Forms.TextBox tbSPIReadReg2;
+        private System.Windows.Forms.Button btnSPIWrite2;
+        private System.Windows.Forms.TextBox tbSPIWriteData2;
+        private System.Windows.Forms.TextBox tbSPIWriteReg2;
+        private System.Windows.Forms.Button btnSPIRead1;
+        private System.Windows.Forms.TextBox tbSPIReadReg1;
+        private System.Windows.Forms.Button btnSPIWrite1;
+        private System.Windows.Forms.TextBox tbSPIWriteData1;
+        private System.Windows.Forms.TextBox tbSPIWriteReg1;
+        private System.Windows.Forms.Button btnRegRead0;
+        private System.Windows.Forms.Button btnRegWrite0;
+        private System.Windows.Forms.Button btnRegRead8;
+        private System.Windows.Forms.Button btnRegWrite8;
+        private System.Windows.Forms.Button btnRegRead7;
+        private System.Windows.Forms.Button btnRegWrite7;
+        private System.Windows.Forms.Button btnRegRead6;
+        private System.Windows.Forms.Button btnRegWrite6;
+        private System.Windows.Forms.Button btnRegRead5;
+        private System.Windows.Forms.Button btnRegWrite5;
+        private System.Windows.Forms.Button btnRegRead4;
+        private System.Windows.Forms.Button btnRegWrite4;
+        private System.Windows.Forms.Button btnRegRead3;
+        private System.Windows.Forms.Button btnRegWrite3;
+        private System.Windows.Forms.Button btnRegRead2;
+        private System.Windows.Forms.Button btnRegWrite2;
+        private System.Windows.Forms.Button btnRegRead1;
+        private System.Windows.Forms.Button btnRegWrite1;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox tbWriteRegData8;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox tbWriteRegData7;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox tbWriteRegData6;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox tbWriteRegData5;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox tbReg1FData0;
+        private System.Windows.Forms.Button btnReg1FWrite;
+        private System.Windows.Forms.TextBox tbReg1FData2;
+        private System.Windows.Forms.TextBox tbReg1FData1;
     }
 }

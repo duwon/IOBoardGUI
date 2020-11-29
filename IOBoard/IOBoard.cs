@@ -533,11 +533,10 @@ namespace IOBoard
                         tbDICycle.Text = RxMessage.data[4].ToString();
                         tbDPSCycle.Text = RxMessage.data[5].ToString();
                         tbPSCycle.Text = RxMessage.data[6].ToString();
-                        tbPMMode.Text = RxMessage.data[7].ToString();
-                        tbPMCycle.Text = RxMessage.data[8].ToString();
-                        tbPMVolt.Text = (RxMessage.data[9] + (RxMessage.data[10] << 8)).ToString();
-                        tbPMCurrent.Text = RxMessage.data[11].ToString();
-                        tbPMFreq.Text = RxMessage.data[12].ToString();
+                        tbPMCycle.Text = RxMessage.data[7].ToString();
+                        tbPMVolt.Text = (RxMessage.data[8] + (RxMessage.data[9] << 8)).ToString();
+                        tbPMCurrent.Text = RxMessage.data[10].ToString();
+                        tbPMFreq.Text = RxMessage.data[11].ToString();
                     }));
                     break;
                 case 0x2F: //Firmware ACK
@@ -725,7 +724,7 @@ namespace IOBoard
 
         private void btnUpdateConfig_Click(object sender, EventArgs e)
         {
-            byte[] tmpPayload = new byte[13];
+            byte[] tmpPayload = new byte[12];
             tmpPayload[0] = (byte)Convert.ToInt32(tbDO0.Text);
             tmpPayload[1] = (byte)Convert.ToInt32(tbDO1.Text);
             tmpPayload[2] = (byte)Convert.ToInt32(tbRTDCycle.Text);
@@ -733,12 +732,11 @@ namespace IOBoard
             tmpPayload[4] = (byte)Convert.ToInt32(tbDICycle.Text);
             tmpPayload[5] = (byte)Convert.ToInt32(tbDPSCycle.Text);
             tmpPayload[6] = (byte)Convert.ToInt32(tbPSCycle.Text);
-            tmpPayload[7] = (byte)Convert.ToInt32(tbPMMode.Text);
-            tmpPayload[8] = (byte)Convert.ToInt32(tbPMCycle.Text);
-            tmpPayload[9] = (byte)Convert.ToInt32(tbPMVolt.Text);
-            tmpPayload[10] = (byte)(Convert.ToInt32(tbPMVolt.Text) >> 8);
-            tmpPayload[11] = (byte)Convert.ToInt32(tbPMCurrent.Text);
-            tmpPayload[12] = (byte)Convert.ToInt32(tbPMFreq.Text);
+            tmpPayload[7] = (byte)Convert.ToInt32(tbPMCycle.Text);
+            tmpPayload[8] = (byte)Convert.ToInt32(tbPMVolt.Text);
+            tmpPayload[9] = (byte)(Convert.ToInt32(tbPMVolt.Text) >> 8);
+            tmpPayload[10] = (byte)Convert.ToInt32(tbPMCurrent.Text);
+            tmpPayload[11] = (byte)Convert.ToInt32(tbPMFreq.Text);
             SendPacket(0x12, tmpPayload);
         }
 
@@ -858,6 +856,139 @@ namespace IOBoard
         {
             byte[] tmpPayload = new byte[0];
             SendPacket(0xd2, tmpPayload);
+        }
+
+        private void BtnSPIWrite_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[2] { (byte)Convert.ToInt32(tbSPIWriteReg0.Text, 16), (byte)Convert.ToInt32(tbSPIWriteData0.Text, 16) };
+            SendPacket(0xd3, tmpPayload);
+        }
+
+        private void BtnSPIRead_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { (byte)Convert.ToInt32(tbSPIReadReg0.Text, 16)};
+            SendPacket(0xd4, tmpPayload);
+        }
+
+        private void BtnRequestStatus_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[0];
+            SendPacket(0xd5, tmpPayload);
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[2] { 0x0b, 0x01 };
+            SendPacket(0xd3, tmpPayload);
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x18 };
+            SendPacket(0xd6, tmpPayload);
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x1A };
+            SendPacket(0xd6, tmpPayload);
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x20 };
+            SendPacket(0xd4, tmpPayload);
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x1e };
+            SendPacket(0xd6, tmpPayload);
+        }
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x22 };
+            SendPacket(0xd4, tmpPayload);
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x24 };
+            SendPacket(0xd4, tmpPayload);
+        }
+
+        byte[] btnRegValue = new byte[9] { 0x12, 0x17, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25 };
+        private void btnRegWrite_Clicked(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[2] { 0x00, 0x00 };
+
+            Button[] btnRegWrite = new Button[9] { btnRegWrite0, btnRegWrite1, btnRegWrite2, btnRegWrite3, btnRegWrite4, btnRegWrite5, btnRegWrite6, btnRegWrite7, btnRegWrite8 };
+            TextBox[] tbWriteRegData = new TextBox[9] { tbWriteRegData0, tbWriteRegData1, tbWriteRegData2, tbWriteRegData3, tbWriteRegData4, tbWriteRegData5, tbWriteRegData6, tbWriteRegData7, tbWriteRegData8 };
+            for (int i = 0; i < btnRegWrite.Length; i++)
+            {
+                if (sender.Equals(btnRegWrite[i]) == true)
+                {
+                    tmpPayload[0] = btnRegValue[i];
+                    tmpPayload[1] = (byte)Convert.ToInt32(tbWriteRegData[i].Text, 16);
+                    SendPacket(0xD3, tmpPayload);
+                }
+            }
+        }
+        private void btnRegRead_Clicked(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x00 };
+            
+            Button[] btnRegRead = new Button[9] { btnRegRead0, btnRegRead1, btnRegRead2, btnRegRead3, btnRegRead4, btnRegRead5, btnRegRead6, btnRegRead7, btnRegRead8 };
+            for (int i = 0; i < btnRegRead.Length; i++)
+            {
+                if (sender.Equals(btnRegRead[i]) == true)
+                {
+                    tmpPayload[0] = btnRegValue[i];
+                    SendPacket(0xD4, tmpPayload);
+                }
+            }
+        }
+
+        private void btnSPIWrite_Clicked(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[2] { 0x00, 0x00 };
+
+            Button[] btnSPIWrite = new Button[5] { btnSPIWrite0, btnSPIWrite1, btnSPIWrite2, btnSPIWrite3, btnSPIWrite4};
+            TextBox[] tbSPIWriteData = new TextBox[5] { tbSPIWriteData0, tbSPIWriteData1, tbSPIWriteData2, tbSPIWriteData3, tbSPIWriteData4};
+            TextBox[] tbSPIWriteReg = new TextBox[5] { tbSPIWriteReg0, tbSPIWriteReg1, tbSPIWriteReg2, tbSPIWriteReg3, tbSPIWriteReg4 };
+            for (int i = 0; i < btnSPIWrite.Length; i++)
+            {
+                if (sender.Equals(btnSPIWrite[i]) == true)
+                {
+                    tmpPayload[0] = (byte)Convert.ToInt32(tbSPIWriteReg[i].Text, 16);
+                    tmpPayload[1] = (byte)Convert.ToInt32(tbSPIWriteData[i].Text, 16);
+                    SendPacket(0xD3, tmpPayload);
+                }
+            }
+        }
+
+        private void btnSPIRead_Clicked(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x00 };
+
+            Button[] btnSPIRead = new Button[4] { btnSPIRead0, btnSPIRead1, btnSPIRead2, btnSPIRead3}; 
+            TextBox[] tbSPIReadReg = new TextBox[4] { tbSPIReadReg0, tbSPIReadReg1, tbSPIReadReg2, tbSPIReadReg3 };
+            for (int i = 0; i < btnSPIRead.Length; i++)
+            {
+                if (sender.Equals(btnSPIRead[i]) == true)
+                {
+                    tmpPayload[0] = (byte)Convert.ToInt32(tbSPIReadReg[i].Text, 16);
+                    SendPacket(0xD4, tmpPayload);
+                }
+            }
+        }
+
+        private void BtnReg1FWrite_Click(object sender, EventArgs e)
+        {
+            byte txData = (byte)((Convert.ToInt32(tbReg1FData0.Text, 16) << 6) + (Convert.ToInt32(tbReg1FData1.Text, 16) << 3) + (Convert.ToInt32(tbReg1FData0.Text, 16)));
+            byte[] tmpPayload = new byte[2] { 0x1F, txData };
+            SendPacket(0xd3, tmpPayload);
         }
     }
 

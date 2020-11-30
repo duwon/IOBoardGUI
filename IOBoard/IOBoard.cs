@@ -512,6 +512,8 @@ namespace IOBoard
 
                         tbDO0Value.Text = stIOStatus.Do[0].ToString();
                         tbDO1Value.Text = stIOStatus.Do[1].ToString();
+
+                        tbRTD.Text = (stIOStatus.Rtd >> 8).ToString() + "." + (stIOStatus.Rtd & 0xFF).ToString();
                     }));
                     break;
                 case 0x21: //MSGCMD_RESPONSE_TIME 0x21U
@@ -989,6 +991,21 @@ namespace IOBoard
             byte txData = (byte)((Convert.ToInt32(tbReg1FData0.Text, 16) << 6) + (Convert.ToInt32(tbReg1FData1.Text, 16) << 3) + (Convert.ToInt32(tbReg1FData0.Text, 16)));
             byte[] tmpPayload = new byte[2] { 0x1F, txData };
             SendPacket(0xd3, tmpPayload);
+        }
+
+        private void TbSY7D609_ReadReg_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1];
+            tmpPayload[0] = (byte)Convert.ToInt32(tbSY7D609_R1.Text, 16);
+            SendPacket(0xE0, tmpPayload);
+        }
+
+        private void TbSY7D609_ReadReg_Indrect_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[4];
+            byte[] intToBytes = BitConverter.GetBytes(Convert.ToInt32(tbSY7D609_R2.Text, 16));
+            Array.Copy(intToBytes, 0, tmpPayload, 0, 4);
+            SendPacket(0xE1, tmpPayload);
         }
     }
 

@@ -104,7 +104,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.tbRTD = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.tbDO0Value = new System.Windows.Forms.TextBox();
             this.timer1s = new System.Windows.Forms.Timer(this.components);
@@ -177,6 +177,10 @@
             this.tbWriteRegData2 = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
             this.tbWriteRegData0 = new System.Windows.Forms.TextBox();
+            this.tbSY7D609_ReadReg = new System.Windows.Forms.Button();
+            this.tbSY7D609_R2 = new System.Windows.Forms.TextBox();
+            this.tbSY7D609_R1 = new System.Windows.Forms.TextBox();
+            this.tbSY7D609_ReadReg_Indrect = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -747,7 +751,7 @@
             this.panel_status.Controls.Add(this.label22);
             this.panel_status.Controls.Add(this.textBox10);
             this.panel_status.Controls.Add(this.label23);
-            this.panel_status.Controls.Add(this.textBox11);
+            this.panel_status.Controls.Add(this.tbRTD);
             this.panel_status.Controls.Add(this.label24);
             this.panel_status.Controls.Add(this.tbDO0Value);
             this.panel_status.Location = new System.Drawing.Point(861, 359);
@@ -849,7 +853,7 @@
             this.tbDI3.Name = "tbDI3";
             this.tbDI3.Size = new System.Drawing.Size(77, 22);
             this.tbDI3.TabIndex = 18;
-            this.tbDI3.Text = "220";
+            this.tbDI3.Text = "0";
             // 
             // label17
             // 
@@ -868,7 +872,7 @@
             this.tbDI2.Name = "tbDI2";
             this.tbDI2.Size = new System.Drawing.Size(77, 22);
             this.tbDI2.TabIndex = 16;
-            this.tbDI2.Text = "60";
+            this.tbDI2.Text = "0";
             // 
             // label18
             // 
@@ -887,7 +891,7 @@
             this.tbDI1.Name = "tbDI1";
             this.tbDI1.Size = new System.Drawing.Size(77, 22);
             this.tbDI1.TabIndex = 14;
-            this.tbDI1.Text = "1";
+            this.tbDI1.Text = "0";
             // 
             // label19
             // 
@@ -906,7 +910,7 @@
             this.tbDI0.Name = "tbDI0";
             this.tbDI0.Size = new System.Drawing.Size(77, 22);
             this.tbDI0.TabIndex = 12;
-            this.tbDI0.Text = "1";
+            this.tbDI0.Text = "0";
             // 
             // label20
             // 
@@ -971,18 +975,18 @@
             this.label23.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label23.Location = new System.Drawing.Point(61, 92);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(66, 15);
+            this.label23.Size = new System.Drawing.Size(31, 15);
             this.label23.TabIndex = 3;
-            this.label23.Text = "RTD Cycle";
+            this.label23.Text = "RTD";
             // 
-            // textBox11
+            // tbRTD
             // 
-            this.textBox11.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox11.Location = new System.Drawing.Point(143, 89);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(77, 22);
-            this.textBox11.TabIndex = 2;
-            this.textBox11.Text = "10";
+            this.tbRTD.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbRTD.Location = new System.Drawing.Point(143, 89);
+            this.tbRTD.Name = "tbRTD";
+            this.tbRTD.Size = new System.Drawing.Size(77, 22);
+            this.tbRTD.TabIndex = 2;
+            this.tbRTD.Text = "0";
             // 
             // label24
             // 
@@ -1098,6 +1102,10 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.tbSY7D609_ReadReg_Indrect);
+            this.panel2.Controls.Add(this.tbSY7D609_ReadReg);
+            this.panel2.Controls.Add(this.tbSY7D609_R2);
+            this.panel2.Controls.Add(this.tbSY7D609_R1);
             this.panel2.Controls.Add(this.label31);
             this.panel2.Controls.Add(this.tbReg1FData0);
             this.panel2.Controls.Add(this.btnReg1FWrite);
@@ -1175,7 +1183,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label31.Location = new System.Drawing.Point(365, 181);
+            this.label31.Location = new System.Drawing.Point(304, 160);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(129, 15);
             this.label31.TabIndex = 104;
@@ -1184,7 +1192,7 @@
             // tbReg1FData0
             // 
             this.tbReg1FData0.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbReg1FData0.Location = new System.Drawing.Point(368, 199);
+            this.tbReg1FData0.Location = new System.Drawing.Point(307, 178);
             this.tbReg1FData0.Name = "tbReg1FData0";
             this.tbReg1FData0.Size = new System.Drawing.Size(39, 22);
             this.tbReg1FData0.TabIndex = 103;
@@ -1192,7 +1200,7 @@
             // 
             // btnReg1FWrite
             // 
-            this.btnReg1FWrite.Location = new System.Drawing.Point(503, 199);
+            this.btnReg1FWrite.Location = new System.Drawing.Point(442, 178);
             this.btnReg1FWrite.Name = "btnReg1FWrite";
             this.btnReg1FWrite.Size = new System.Drawing.Size(50, 22);
             this.btnReg1FWrite.TabIndex = 102;
@@ -1203,7 +1211,7 @@
             // tbReg1FData2
             // 
             this.tbReg1FData2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbReg1FData2.Location = new System.Drawing.Point(458, 199);
+            this.tbReg1FData2.Location = new System.Drawing.Point(397, 178);
             this.tbReg1FData2.Name = "tbReg1FData2";
             this.tbReg1FData2.Size = new System.Drawing.Size(39, 22);
             this.tbReg1FData2.TabIndex = 101;
@@ -1212,7 +1220,7 @@
             // tbReg1FData1
             // 
             this.tbReg1FData1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbReg1FData1.Location = new System.Drawing.Point(413, 199);
+            this.tbReg1FData1.Location = new System.Drawing.Point(352, 178);
             this.tbReg1FData1.Name = "tbReg1FData1";
             this.tbReg1FData1.Size = new System.Drawing.Size(39, 22);
             this.tbReg1FData1.TabIndex = 100;
@@ -1739,6 +1747,44 @@
             this.tbWriteRegData0.TabIndex = 0;
             this.tbWriteRegData0.Text = "0A";
             // 
+            // tbSY7D609_ReadReg
+            // 
+            this.tbSY7D609_ReadReg.Location = new System.Drawing.Point(605, 199);
+            this.tbSY7D609_ReadReg.Name = "tbSY7D609_ReadReg";
+            this.tbSY7D609_ReadReg.Size = new System.Drawing.Size(50, 22);
+            this.tbSY7D609_ReadReg.TabIndex = 107;
+            this.tbSY7D609_ReadReg.Text = "READ";
+            this.tbSY7D609_ReadReg.UseVisualStyleBackColor = true;
+            this.tbSY7D609_ReadReg.Click += new System.EventHandler(this.TbSY7D609_ReadReg_Click);
+            // 
+            // tbSY7D609_R2
+            // 
+            this.tbSY7D609_R2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R2.Location = new System.Drawing.Point(527, 227);
+            this.tbSY7D609_R2.Name = "tbSY7D609_R2";
+            this.tbSY7D609_R2.Size = new System.Drawing.Size(72, 22);
+            this.tbSY7D609_R2.TabIndex = 106;
+            this.tbSY7D609_R2.Text = "010203";
+            // 
+            // tbSY7D609_R1
+            // 
+            this.tbSY7D609_R1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R1.Location = new System.Drawing.Point(560, 199);
+            this.tbSY7D609_R1.Name = "tbSY7D609_R1";
+            this.tbSY7D609_R1.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R1.TabIndex = 105;
+            this.tbSY7D609_R1.Text = "1";
+            // 
+            // tbSY7D609_ReadReg_Indrect
+            // 
+            this.tbSY7D609_ReadReg_Indrect.Location = new System.Drawing.Point(605, 227);
+            this.tbSY7D609_ReadReg_Indrect.Name = "tbSY7D609_ReadReg_Indrect";
+            this.tbSY7D609_ReadReg_Indrect.Size = new System.Drawing.Size(50, 22);
+            this.tbSY7D609_ReadReg_Indrect.TabIndex = 108;
+            this.tbSY7D609_ReadReg_Indrect.Text = "READ";
+            this.tbSY7D609_ReadReg_Indrect.UseVisualStyleBackColor = true;
+            this.tbSY7D609_ReadReg_Indrect.Click += new System.EventHandler(this.TbSY7D609_ReadReg_Indrect_Click);
+            // 
             // IOBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1857,7 +1903,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox tbRTD;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox tbDO0Value;
         private System.Windows.Forms.Timer timer1s;
@@ -1938,5 +1984,9 @@
         private System.Windows.Forms.Button btnReg1FWrite;
         private System.Windows.Forms.TextBox tbReg1FData2;
         private System.Windows.Forms.TextBox tbReg1FData1;
+        private System.Windows.Forms.Button tbSY7D609_ReadReg;
+        private System.Windows.Forms.TextBox tbSY7D609_R2;
+        private System.Windows.Forms.TextBox tbSY7D609_R1;
+        private System.Windows.Forms.Button tbSY7D609_ReadReg_Indrect;
     }
 }

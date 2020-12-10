@@ -70,7 +70,7 @@ namespace IOBoard
             public byte[] Do;
         }
 
-        enum Packet : byte { STX = 0x55, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
+        enum Packet : byte { STX = 0x02, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
         System.Collections.Concurrent.ConcurrentQueue<byte> rxBuffer = new System.Collections.Concurrent.ConcurrentQueue<byte>();
         Message RxMessage = new Message();
         IOStatus stIOStatus;

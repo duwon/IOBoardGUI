@@ -70,7 +70,7 @@ namespace IOBoard
             public byte[] Do;
         }
 
-        enum Packet : byte { STX = 0x02, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
+        enum Packet : byte { STX = 0x55, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
         System.Collections.Concurrent.ConcurrentQueue<byte> rxBuffer = new System.Collections.Concurrent.ConcurrentQueue<byte>();
         Message RxMessage = new Message();
         IOStatus stIOStatus;
@@ -86,6 +86,7 @@ namespace IOBoard
             InitializeComponent();
             RefreshCOMPortName();
             this.Size = new Size(1000, 630);
+            this.MaximumSize = new Size(1000, 630);
 
             RxMessage.data = new byte[256];
             stIOStatus.Ai = new UInt16[2];
@@ -163,7 +164,6 @@ namespace IOBoard
 
         private void IOBoard_Load(object sender, EventArgs e)
         {
-            
         }
         private void IOBoard_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -296,6 +296,7 @@ namespace IOBoard
 
         private void SendPacket(byte msgID, byte[] txPayload)
         {
+#if true
             byte[] txPacket = new byte[txPayload.Length + 5];
             Array.Copy(txPayload, 0, txPacket, 3, txPayload.Length);
 
@@ -304,7 +305,17 @@ namespace IOBoard
             txPacket[2] = (byte)txPayload.Length;
             txPacket[txPacket.Length - 2] = (byte)Packet.ETX;
             txPacket[txPacket.Length - 1] = CalChecksum(txPacket);
+#else
+            byte[] txPacket = new byte[txPayload.Length + 6];
+            Array.Copy(txPayload, 0, txPacket, 4, txPayload.Length);
 
+            txPacket[0] = (byte)Packet.STX;
+            txPacket[1] = (byte)Packet.STX;
+            txPacket[2] = msgID;
+            txPacket[3] = (byte)txPayload.Length;
+            txPacket[txPacket.Length - 2] = (byte)Packet.ETX;
+            txPacket[txPacket.Length - 1] = CalChecksum(txPacket);
+#endif
             SendData(txPacket);
         }
 
@@ -474,7 +485,6 @@ namespace IOBoard
             }
         }
 
-        int fwSeqNumLast = 10;
         private void ParsingMessage()
         {
             switch (RxMessage.type)
@@ -542,45 +552,71 @@ namespace IOBoard
                     }));
                     break;
                 case 0x2F: //Firmware ACK
-                    flag_viewSendData = false;
                     Console.WriteLine("MSGCMD_RESPONSE_FW_ACK 0x2FU");
-                    byte[] tmpPayload = new byte[192 + 2];
-                    int fwSeqNum = ((RxMessage.data[0] & 0x7F) << 8) + RxMessage.data[1] + 1;
-                    if (fwSeqNum == firmwarePacket.GetLength(0))
-                    {
-                        this.Invoke(new Action(delegate ()
-                        {
-                            debugText.AppendText(" 100%  END\r\n");
-                            flag_viewSendData = true;
-                        }));
-                    }
-                    else if (fwSeqNum < firmwarePacket.GetLength(0))
-                    { 
-                        for (int fwByteIndex = 0; fwByteIndex < 194; fwByteIndex++)
-                        {
-                            tmpPayload[fwByteIndex] = firmwarePacket[fwSeqNum, fwByteIndex];
-                        }
-                        SendPacket(0x1f, tmpPayload);
-
-                        if((fwSeqNum % (firmwarePacket.GetLength(0) / 10)) == 0)
-                        {
-                            this.Invoke(new Action(delegate ()
-                            {
-                                debugText.AppendText((fwSeqNum * 100 / firmwarePacket.GetLength(0)).ToString() + "% ");
-                            }));
-                            //fwSeqNumLast += 10;
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Wrone Num : %d", fwSeqNum);
-                    }
+                    cntSendingFirmwareUpload = ((RxMessage.data[0] & 0x7F) << 8) + RxMessage.data[1] + 1;
+                    sendFirmwareUpload(cntSendingFirmwareUpload);
                     break;
                 default:
                     Console.WriteLine("None");
                     break;
             }
         }
+
+        int cntSendingFirmwareUpload = 0;
+        private void sendFirmwareUpload(int fwSeqNum)
+        {
+            flag_viewSendData = false;
+            byte[] tmpPayload = new byte[192 + 2];
+
+            if( fwSeqNum == 0)
+            {
+                cntSendingFirmwareUpload = 0;
+            }
+
+            if (fwSeqNum == firmwarePacket.GetLength(0))
+            {
+                this.Invoke(new Action(delegate ()
+                {
+                    debugText.AppendText(" 100%  END\r\n");
+                    flag_viewSendData = true;
+                    flag_FirmwareUploading = false;
+                    btnFileSendSend.BackColor = Color.Gainsboro;
+                }));
+            }
+            else if (fwSeqNum < firmwarePacket.GetLength(0))
+            {
+                cntFirmwareUploading = 0;
+                flag_FirmwareUploading = true;
+                btnFileSendSend.BackColor = Color.Green;
+                for (int fwByteIndex = 0; fwByteIndex < 194; fwByteIndex++)
+                {
+                    tmpPayload[fwByteIndex] = firmwarePacket[fwSeqNum, fwByteIndex];
+                }
+                SendPacket(0x1f, tmpPayload);
+
+                if ((fwSeqNum % (firmwarePacket.GetLength(0) / 10)) == 8)
+                {
+                    this.Invoke(new Action(delegate ()
+                    {
+                        debugText.AppendText((fwSeqNum * 100 / firmwarePacket.GetLength(0)).ToString() + "% ");
+                    }));
+                    
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wrone Num : %d", fwSeqNum);
+            }
+        }
+
+        private void timer_1s_interrupt(object sender, EventArgs e)
+        {
+            if (flag_FirmwareUploading == true)
+            {
+                //sendFirmwareUpload(cntSendingFirmwareUpload);
+            }
+        }
+
 
         private void BtnCOMOpen_Click(object sender, EventArgs e)
         {
@@ -653,8 +689,17 @@ namespace IOBoard
         }
 
         byte[,] firmwarePacket;
+        bool flag_FirmwareUploading = false;
         private void BtnFileSendSend_Click(object sender, EventArgs e)
         {
+            if(flag_FirmwareUploading == true)
+            {
+                flag_FirmwareUploading = false;
+                btnFileSendSend.BackColor = Color.Gainsboro;
+                flag_viewSendData = true;
+                return;
+            }
+
             try
             {
                 string saveImageFileName = ShowFileOpenDialog();
@@ -663,33 +708,10 @@ namespace IOBoard
                 byte[] tmpFwData = new byte[192];
                 byte[] tmpPayload = new byte[192 + 2];
 
-                //if (serialPort.IsOpen)
-                //{
-                //    debugText.AppendText("전송 중 ");
-                //    for (Int32 i = 0; i < FwTotalNo; i++)
-                //    {
-                //        fs.Read(tmpFwData, 0, 192);
-                //        Array.Copy(tmpFwData, 0, tmpPayload, 2, 192);
-                //        tmpPayload[0] = (byte)((i >> 8) & 0xFF);
-                //        tmpPayload[1] = (byte)(i  & 0xFF);
-                //        SendPacket(0x1f, tmpPayload);
-                //
-                //        if (i % 5 == 0)
-                //        {
-                //            debugText.AppendText(".");
-                //        }
-                //    }
-                //    debugText.AppendText(" 끝\r\n");
-                //}
-                //else
-                //{
-                //    debugText.AppendText("통신포트를 먼저 연결하세요.\r\n");
-                //}
-
                 firmwarePacket = new byte[FwTotalNo, 194];
                 if (serialPort.IsOpen)
                 {
-                    debugText.AppendText("패킷 생성");
+                    debugText.AppendText("패킷 생성 ");
                     for (Int32 i = 0; i < FwTotalNo; i++)
                     {
                         fs.Read(tmpFwData, 0, 192);
@@ -702,11 +724,7 @@ namespace IOBoard
                     }
                     firmwarePacket[FwTotalNo - 1, 0] |= 0x80; /* 마지막 패킷은 순번의 최상위 비트 SET */
 
-                    for (int fwByteIndex = 0; fwByteIndex < 194; fwByteIndex++)
-                    {
-                        tmpPayload[fwByteIndex] = firmwarePacket[0, fwByteIndex];
-                    }
-                    SendPacket(0x1f, tmpPayload);
+                    sendFirmwareUpload(0);
                 }
                 else
                 {
@@ -811,11 +829,6 @@ namespace IOBoard
                 panel_config.Visible = false;
                 btnSetConfig.BackColor = Color.Gainsboro;
             }
-        }
-
-        private void timer_1s_interrupt(object sender, EventArgs e)
-        {
-
         }
 
         private void btn_DO_Click(object sender, EventArgs e)
@@ -1006,6 +1019,20 @@ namespace IOBoard
             byte[] intToBytes = BitConverter.GetBytes(Convert.ToInt32(tbSY7D609_R2.Text, 16));
             Array.Copy(intToBytes, 0, tmpPayload, 0, 4);
             SendPacket(0xE1, tmpPayload);
+        }
+
+        int cntFirmwareUploading = 0;
+        private void timer_100ms_Tick(object sender, EventArgs e)
+        {
+            if (flag_FirmwareUploading == true)
+            {
+                cntFirmwareUploading++;
+                if (cntFirmwareUploading == 5)
+                {
+                    cntFirmwareUploading = 0;
+                    sendFirmwareUpload(cntSendingFirmwareUpload);
+                }
+            }
         }
     }
 

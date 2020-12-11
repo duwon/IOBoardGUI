@@ -62,7 +62,7 @@ namespace IOBoard
             public float Reactive;
             public float Apparent;
             public float Active_Energy;
-            public UInt16 Rtd;
+            public Int16 Rtd;
             public UInt16 Dps;
             public UInt16 Ps;
             public UInt16[] Ai;
@@ -70,7 +70,7 @@ namespace IOBoard
             public byte[] Do;
         }
 
-        enum Packet : byte { STX = 0x02, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
+        enum Packet : byte { STX = 0x55, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
         System.Collections.Concurrent.ConcurrentQueue<byte> rxBuffer = new System.Collections.Concurrent.ConcurrentQueue<byte>();
         Message RxMessage = new Message();
         IOStatus stIOStatus;
@@ -500,7 +500,7 @@ namespace IOBoard
                     stIOStatus.Apparent = BitConverter.ToSingle(RxMessage.data, 20);
                     stIOStatus.Active_Energy = BitConverter.ToSingle(RxMessage.data, 24);
 
-                    stIOStatus.Rtd = BitConverter.ToUInt16(RxMessage.data, 28);
+                    stIOStatus.Rtd = BitConverter.ToInt16(RxMessage.data, 28);
                     stIOStatus.Dps = BitConverter.ToUInt16(RxMessage.data, 30);
                     stIOStatus.Ps = BitConverter.ToUInt16(RxMessage.data, 32);
                     stIOStatus.Ai[0] = BitConverter.ToUInt16(RxMessage.data, 34);
@@ -523,7 +523,10 @@ namespace IOBoard
                         tbDO0Value.Text = stIOStatus.Do[0].ToString();
                         tbDO1Value.Text = stIOStatus.Do[1].ToString();
 
-                        tbRTD.Text = (stIOStatus.Rtd >> 8).ToString() + "." + (stIOStatus.Rtd & 0xFF).ToString();
+                        tbRTD.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Rtd / 100));
+                        tbAI0.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[0] / 100));
+                        tbAI1.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[1] / 100));
+                        tbPS.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ps / 100));
                     }));
                     break;
                 case 0x21: //MSGCMD_RESPONSE_TIME 0x21U

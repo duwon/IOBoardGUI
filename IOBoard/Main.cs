@@ -23,11 +23,12 @@ namespace IOBoard
             panel_setup_nework.Location = new Point(0, 55);
             panel_view_nework.Location = new Point(0, 55);
             panel_view_io.Location = new Point(0, 55);
+            panel_menu.Location = new Point(0, 55);
 
-            panel_menu.Visible = true;
+            panel_menu.Visible = false;
             panel_view_nework.Visible = false;
             panel_setup_nework.Visible = false;
-            panel_view_io.Visible = false;
+            panel_view_io.Visible = true;
 
 
             ManagementClass MC = new ManagementClass("Win32_NetworkAdapterConfiguration"); ManagementObjectCollection MOC = MC.GetInstances(); foreach (ManagementObject MO in MOC)
@@ -45,9 +46,6 @@ namespace IOBoard
                             tb_IPAddress_setup.Text = addresses[0];
                             tb_subnet_setup.Text = subnets[0];
                             tb_gateway_setup.Text = gateways[0];
-                            tb_IPAddress_view.Text = addresses[0];
-                            tb_subnet_view.Text = subnets[0];
-                            tb_gateway_view.Text = gateways[0];
                         }
                     }
                 }
@@ -69,10 +67,19 @@ namespace IOBoard
 
         private void Btn_Menu_Click(object sender, EventArgs e)
         {
-            panel_menu.Visible = true;
-            panel_view_nework.Visible = false;
-            panel_setup_nework.Visible = false;
-            panel_view_io.Visible = false;
+            if (panel_menu.Visible == false)
+            {
+                panel_menu.Visible = true;
+                panel_view_nework.Visible = false;
+                panel_setup_nework.Visible = false;
+            }
+            else
+            {
+                panel_menu.Visible = false;
+                panel_view_nework.Visible = false;
+                panel_setup_nework.Visible = false;
+            }
+
         }
 
         private void Btn_SetupNetwork_Click(object sender, EventArgs e)
@@ -80,7 +87,6 @@ namespace IOBoard
             panel_menu.Visible = false;
             panel_view_nework.Visible = false;
             panel_setup_nework.Visible = true;
-            panel_view_io.Visible = false;
         }
 
         private void Btn_ViewNetwork_Click(object sender, EventArgs e)
@@ -88,15 +94,6 @@ namespace IOBoard
             panel_menu.Visible = false;
             panel_view_nework.Visible = true;
             panel_setup_nework.Visible = false;
-            panel_view_io.Visible = false;
-        }
-
-        private void Btn_ViewIO_Click(object sender, EventArgs e)
-        {
-            panel_menu.Visible = false;
-            panel_view_nework.Visible = false;
-            panel_setup_nework.Visible = false;
-            panel_view_io.Visible = true;
         }
 
         private void Btn_CLOSE_Click(object sender, EventArgs e)

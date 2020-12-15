@@ -27,8 +27,8 @@ namespace IOBoard
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new IOBoard());
-            Application.Run(new Main());
+            Application.Run(new IOBoard());
+            //Application.Run(new Main());
         }
     }
 }

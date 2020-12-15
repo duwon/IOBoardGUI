@@ -527,6 +527,14 @@ namespace IOBoard
                         tbAI0.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[0] / 100));
                         tbAI1.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[1] / 100));
                         tbPS.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ps / 100));
+
+                        tbStatusPMVolts.Text = string.Format("{0:0.00} ", stIOStatus.Volt);
+                        tbStatusPMCurrent.Text = string.Format("{0:0.00} ", stIOStatus.Current);
+                        tbStatusPMActive.Text = string.Format("{0:0.00} ", stIOStatus.Active);
+                        tbStatusPMReactive.Text = string.Format("{0:0.00} ", stIOStatus.Reactive);
+                        tbStatusPMApparent.Text = string.Format("{0:0.00} ", stIOStatus.Apparent);
+                        tbStatusPMEnergy.Text = string.Format("{0:0.00} ", stIOStatus.Active_Energy);
+                        tbStatusPMCos.Text = string.Format("{0:0.00} ", stIOStatus.Cos);
                     }));
                     break;
                 case 0x21: //MSGCMD_RESPONSE_TIME 0x21U
@@ -876,18 +884,6 @@ namespace IOBoard
             SendPacket(0xd2, tmpPayload);
         }
 
-        private void BtnSPIWrite_Click(object sender, EventArgs e)
-        {
-            byte[] tmpPayload = new byte[2] { (byte)Convert.ToInt32(tbSPIWriteReg0.Text, 16), (byte)Convert.ToInt32(tbSPIWriteData0.Text, 16) };
-            SendPacket(0xd3, tmpPayload);
-        }
-
-        private void BtnSPIRead_Click(object sender, EventArgs e)
-        {
-            byte[] tmpPayload = new byte[1] { (byte)Convert.ToInt32(tbSPIReadReg0.Text, 16)};
-            SendPacket(0xd4, tmpPayload);
-        }
-
         private void BtnRequestStatus_Click(object sender, EventArgs e)
         {
             byte[] tmpPayload = new byte[0];
@@ -912,28 +908,10 @@ namespace IOBoard
             SendPacket(0xd6, tmpPayload);
         }
 
-        private void Button4_Click(object sender, EventArgs e)
-        {
-            byte[] tmpPayload = new byte[1] { 0x20 };
-            SendPacket(0xd4, tmpPayload);
-        }
-
         private void Button5_Click(object sender, EventArgs e)
         {
             byte[] tmpPayload = new byte[1] { 0x1e };
             SendPacket(0xd6, tmpPayload);
-        }
-
-        private void Button6_Click(object sender, EventArgs e)
-        {
-            byte[] tmpPayload = new byte[1] { 0x22 };
-            SendPacket(0xd4, tmpPayload);
-        }
-
-        private void Button7_Click(object sender, EventArgs e)
-        {
-            byte[] tmpPayload = new byte[1] { 0x24 };
-            SendPacket(0xd4, tmpPayload);
         }
 
         byte[] btnRegValue = new byte[9] { 0x12, 0x17, 0x1f, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25 };

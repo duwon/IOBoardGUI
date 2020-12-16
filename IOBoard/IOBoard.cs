@@ -527,6 +527,7 @@ namespace IOBoard
                         tbAI0.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[0] / 100));
                         tbAI1.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[1] / 100));
                         tbPS.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ps / 100));
+                        tbStatusDP.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Dps / 100));
 
                         tbStatusPMVolts.Text = string.Format("{0:0.00} ", stIOStatus.Volt);
                         tbStatusPMCurrent.Text = string.Format("{0:0.00} ", stIOStatus.Current);
@@ -535,6 +536,7 @@ namespace IOBoard
                         tbStatusPMApparent.Text = string.Format("{0:0.00} ", stIOStatus.Apparent);
                         tbStatusPMEnergy.Text = string.Format("{0:0.00} ", stIOStatus.Active_Energy);
                         tbStatusPMCos.Text = string.Format("{0:0.00} ", stIOStatus.Cos);
+
                     }));
                     break;
                 case 0x21: //MSGCMD_RESPONSE_TIME 0x21U

@@ -78,6 +78,8 @@
             this.lbBoardTime = new System.Windows.Forms.Label();
             this.btnViewStatusValue = new System.Windows.Forms.Button();
             this.panel_status = new System.Windows.Forms.Panel();
+            this.label42 = new System.Windows.Forms.Label();
+            this.tbStatusPMCos = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
@@ -88,7 +90,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.tbPS = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbStatusDP = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.tbStatusPMEnergy = new System.Windows.Forms.TextBox();
             this.btnRequestStatus = new System.Windows.Forms.Button();
@@ -191,8 +193,6 @@
             this.label37 = new System.Windows.Forms.Label();
             this.tbWriteRegData0 = new System.Windows.Forms.TextBox();
             this.timer_100ms = new System.Windows.Forms.Timer(this.components);
-            this.label42 = new System.Windows.Forms.Label();
-            this.tbStatusPMCos = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -719,7 +719,7 @@
             this.panel_status.Controls.Add(this.label32);
             this.panel_status.Controls.Add(this.tbPS);
             this.panel_status.Controls.Add(this.label25);
-            this.panel_status.Controls.Add(this.textBox4);
+            this.panel_status.Controls.Add(this.tbStatusDP);
             this.panel_status.Controls.Add(this.label12);
             this.panel_status.Controls.Add(this.tbStatusPMEnergy);
             this.panel_status.Controls.Add(this.btnRequestStatus);
@@ -751,6 +751,25 @@
             this.panel_status.Name = "panel_status";
             this.panel_status.Size = new System.Drawing.Size(667, 296);
             this.panel_status.TabIndex = 27;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label42.Location = new System.Drawing.Point(296, 265);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(55, 15);
+            this.label42.TabIndex = 66;
+            this.label42.Text = "PM Cos";
+            // 
+            // tbStatusPMCos
+            // 
+            this.tbStatusPMCos.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbStatusPMCos.Location = new System.Drawing.Point(386, 262);
+            this.tbStatusPMCos.Name = "tbStatusPMCos";
+            this.tbStatusPMCos.Size = new System.Drawing.Size(77, 22);
+            this.tbStatusPMCos.TabIndex = 65;
+            this.tbStatusPMCos.Text = "1";
             // 
             // label41
             // 
@@ -849,14 +868,14 @@
             this.label25.TabIndex = 55;
             this.label25.Text = "DP";
             // 
-            // textBox4
+            // tbStatusDP
             // 
-            this.textBox4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox4.Location = new System.Drawing.Point(386, 138);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(77, 22);
-            this.textBox4.TabIndex = 54;
-            this.textBox4.Text = "0";
+            this.tbStatusDP.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbStatusDP.Location = new System.Drawing.Point(386, 138);
+            this.tbStatusDP.Name = "tbStatusDP";
+            this.tbStatusDP.Size = new System.Drawing.Size(77, 22);
+            this.tbStatusDP.TabIndex = 54;
+            this.tbStatusDP.Text = "0";
             // 
             // label12
             // 
@@ -1899,25 +1918,6 @@
             this.timer_100ms.Interval = 1000;
             this.timer_100ms.Tick += new System.EventHandler(this.timer_100ms_Tick);
             // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label42.Location = new System.Drawing.Point(296, 265);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(55, 15);
-            this.label42.TabIndex = 66;
-            this.label42.Text = "PM Cos";
-            // 
-            // tbStatusPMCos
-            // 
-            this.tbStatusPMCos.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbStatusPMCos.Location = new System.Drawing.Point(386, 262);
-            this.tbStatusPMCos.Name = "tbStatusPMCos";
-            this.tbStatusPMCos.Size = new System.Drawing.Size(77, 22);
-            this.tbStatusPMCos.TabIndex = 65;
-            this.tbStatusPMCos.Text = "1";
-            // 
             // IOBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2122,7 +2122,7 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.TextBox tbPS;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbStatusDP;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox tbStatusPMEnergy;
         private System.Windows.Forms.Label label33;

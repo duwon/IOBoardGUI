@@ -334,6 +334,7 @@ namespace IOBoard
             {
                 //debugText.AppendText(ex.Message + "\r\n");
             }
+            //Console.WriteLine("T");
         }
 
         private string ConvertHexToString(String hexString)
@@ -438,6 +439,11 @@ namespace IOBoard
                         rxBuffer.TryDequeue(out RxMessage.data[RxMessage.dataCount]);
                         RxMessage.dataCount++;
 
+                        if(RxMessage.dataCount == 2)
+                        {
+                            Console.WriteLine((((RxMessage.data[0] & 0x7F) << 8) + RxMessage.data[1] + 1).ToString());
+                        }
+
                         if (RxMessage.dataCount == RxMessage.length)
                         {
                             RxMessage.dataCount = 0;
@@ -524,8 +530,8 @@ namespace IOBoard
                         tbDO1Value.Text = stIOStatus.Do[1].ToString();
 
                         tbRTD.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Rtd / 100));
-                        tbAI0.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[0] / 100));
-                        tbAI1.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ai[1] / 100));
+                        tbAI0.Text = string.Format("{0:0.000} ", ((float)stIOStatus.Ai[0] / 1000));
+                        tbAI1.Text = string.Format("{0:0.000} ", ((float)stIOStatus.Ai[1] / 1000));
                         tbPS.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ps / 100));
                         tbStatusDP.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Dps / 100));
 
@@ -534,7 +540,7 @@ namespace IOBoard
                         tbStatusPMActive.Text = string.Format("{0:0.00} ", stIOStatus.Active);
                         tbStatusPMReactive.Text = string.Format("{0:0.00} ", stIOStatus.Reactive);
                         tbStatusPMApparent.Text = string.Format("{0:0.00} ", stIOStatus.Apparent);
-                        tbStatusPMEnergy.Text = string.Format("{0:0.00} ", stIOStatus.Active_Energy);
+                        tbStatusPMEnergy.Text = string.Format("{0:0.000} ", stIOStatus.Active_Energy);
                         tbStatusPMCos.Text = string.Format("{0:0.00} ", stIOStatus.Cos);
 
                     }));
@@ -565,9 +571,21 @@ namespace IOBoard
                     }));
                     break;
                 case 0x2F: //Firmware ACK
-                    Console.WriteLine("MSGCMD_RESPONSE_FW_ACK 0x2FU");
                     cntSendingFirmwareUpload = ((RxMessage.data[0] & 0x7F) << 8) + RxMessage.data[1] + 1;
                     sendFirmwareUpload(cntSendingFirmwareUpload);
+                    Console.WriteLine("MSGCMD_RESPONSE_FW_ACK 0x2FU   Send:" + cntSendingFirmwareUpload.ToString());
+                    break;
+                case 0xE3:
+                    this.Invoke(new Action(delegate ()
+                    {
+                        btnReadDPTemp.Text = string.Format("DP Temp\r\n {0:0.00} °C", BitConverter.ToSingle(RxMessage.data, 0));
+                    }));
+                    break;
+                case 0xE2:
+                    this.Invoke(new Action(delegate ()
+                    {
+                        btnPowerMeter.Text = string.Format("현재 소비량\r\n {0:0.000} W", BitConverter.ToSingle(RxMessage.data, 0));
+                    }));
                     break;
                 default:
                     Console.WriteLine("None");
@@ -618,7 +636,7 @@ namespace IOBoard
             }
             else
             {
-                Console.WriteLine("Wrone Num : %d", fwSeqNum);
+                //Console.WriteLine("Write Num : %d", fwSeqNum);
             }
         }
 
@@ -952,9 +970,9 @@ namespace IOBoard
         {
             byte[] tmpPayload = new byte[2] { 0x00, 0x00 };
 
-            Button[] btnSPIWrite = new Button[5] { btnSPIWrite0, btnSPIWrite1, btnSPIWrite2, btnSPIWrite3, btnSPIWrite4};
-            TextBox[] tbSPIWriteData = new TextBox[5] { tbSPIWriteData0, tbSPIWriteData1, tbSPIWriteData2, tbSPIWriteData3, tbSPIWriteData4};
-            TextBox[] tbSPIWriteReg = new TextBox[5] { tbSPIWriteReg0, tbSPIWriteReg1, tbSPIWriteReg2, tbSPIWriteReg3, tbSPIWriteReg4 };
+            Button[] btnSPIWrite = new Button[] { btnSPIWrite0, btnSPIWrite1, btnSPIWrite2, btnSPIWrite3};
+            TextBox[] tbSPIWriteData = new TextBox[] { tbSPIWriteData0, tbSPIWriteData1, tbSPIWriteData2, tbSPIWriteData3};
+            TextBox[] tbSPIWriteReg = new TextBox[] { tbSPIWriteReg0, tbSPIWriteReg1, tbSPIWriteReg2, tbSPIWriteReg3 };
             for (int i = 0; i < btnSPIWrite.Length; i++)
             {
                 if (sender.Equals(btnSPIWrite[i]) == true)
@@ -970,8 +988,8 @@ namespace IOBoard
         {
             byte[] tmpPayload = new byte[1] { 0x00 };
 
-            Button[] btnSPIRead = new Button[4] { btnSPIRead0, btnSPIRead1, btnSPIRead2, btnSPIRead3}; 
-            TextBox[] tbSPIReadReg = new TextBox[4] { tbSPIReadReg0, tbSPIReadReg1, tbSPIReadReg2, tbSPIReadReg3 };
+            Button[] btnSPIRead = new Button[] { btnSPIRead0, btnSPIRead1, btnSPIRead2}; 
+            TextBox[] tbSPIReadReg = new TextBox[] { tbSPIReadReg0, tbSPIReadReg1, tbSPIReadReg2 };
             for (int i = 0; i < btnSPIRead.Length; i++)
             {
                 if (sender.Equals(btnSPIRead[i]) == true)
@@ -982,24 +1000,17 @@ namespace IOBoard
             }
         }
 
-        private void BtnReg1FWrite_Click(object sender, EventArgs e)
+        private void BtnReadDPTemp_Click(object sender, EventArgs e)
         {
-            byte txData = (byte)((Convert.ToInt32(tbReg1FData0.Text, 16) << 6) + (Convert.ToInt32(tbReg1FData1.Text, 16) << 3) + (Convert.ToInt32(tbReg1FData0.Text, 16)));
-            byte[] tmpPayload = new byte[2] { 0x1F, txData };
-            SendPacket(0xd3, tmpPayload);
+            byte[] tmpPayload = new byte[0];
+            SendPacket(0xE3, tmpPayload);
         }
 
-        private void TbSY7D609_ReadReg_Click(object sender, EventArgs e)
-        {
-            byte[] tmpPayload = new byte[1];
-            tmpPayload[0] = (byte)Convert.ToInt32(tbSY7D609_R1.Text, 16);
-            SendPacket(0xE0, tmpPayload);
-        }
 
         private void TbSY7D609_ReadReg_Indrect_Click(object sender, EventArgs e)
         {
             byte[] tmpPayload = new byte[4];
-            byte[] intToBytes = BitConverter.GetBytes(Convert.ToInt32(tbSY7D609_R2.Text, 16));
+            byte[] intToBytes = BitConverter.GetBytes(Convert.ToInt32(tbSY7D609_WR4.Text, 16));
             Array.Copy(intToBytes, 0, tmpPayload, 0, 4);
             SendPacket(0xE1, tmpPayload);
         }
@@ -1016,6 +1027,42 @@ namespace IOBoard
                     sendFirmwareUpload(cntSendingFirmwareUpload);
                 }
             }
+        }
+
+        private void tbSY7D609_ReadReg_Clicked(object sender, EventArgs e)
+        {
+            TextBox[] tbSY7D609_R = new TextBox[] { tbSY7D609_R1, tbSY7D609_R2, tbSY7D609_R3, tbSY7D609_R4, tbSY7D609_R5, tbSY7D609_R6, tbSY7D609_R7, tbSY7D609_R8 };
+            Button[] btnReadReg = new Button[] { btnSY7D609_ReadReg1, btnSY7D609_ReadReg2, btnSY7D609_ReadReg3, btnSY7D609_ReadReg4, btnSY7D609_ReadReg5, btnSY7D609_ReadReg6, btnSY7D609_ReadReg7, btnSY7D609_ReadReg8 };
+            for (int i = 0; i < btnReadReg.Length; i++)
+            {
+                if (sender.Equals(btnReadReg[i]) == true)
+                {
+                    byte[] tmpPayload = new byte[1];
+                    tmpPayload[0] = (byte)Convert.ToInt32(tbSY7D609_R[i].Text, 16);
+                    SendPacket(0xE0, tmpPayload);
+                }
+            }
+        }
+
+        private void btnSY7D609_WriteReg_Clicked(object sender, EventArgs e)
+        {
+            TextBox[] tbSY7D609_R = new TextBox[] { tbSY7D609_WR1, tbSY7D609_WR2, tbSY7D609_WR3, tbSY7D609_WR4 };
+            Button[] btnReadReg = new Button[] { btnSY7D609_WriteReg1, btnSY7D609_WriteReg2, btnSY7D609_WriteReg3, btnSY7D609_WriteReg4};
+            for (int i = 0; i < btnReadReg.Length; i++)
+            {
+                if (sender.Equals(btnReadReg[i]) == true)
+                {
+                    byte[] intToBytes = BitConverter.GetBytes(Convert.ToInt32(tbSY7D609_R[i].Text, 16));
+                    byte[] tmpPayload = new byte[4] { intToBytes[3], intToBytes[2], intToBytes[1], intToBytes[0] };
+                    SendPacket(0xE1, tmpPayload);
+                }
+            }
+        }
+
+        private void BtnPowerMeter_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x00 };
+            SendPacket(0xE2, tmpPayload);
         }
     }
 

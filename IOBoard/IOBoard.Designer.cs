@@ -78,6 +78,7 @@
             this.lbBoardTime = new System.Windows.Forms.Label();
             this.btnViewStatusValue = new System.Windows.Forms.Button();
             this.panel_status = new System.Windows.Forms.Panel();
+            this.btnReadDPTemp = new System.Windows.Forms.Button();
             this.label42 = new System.Windows.Forms.Label();
             this.tbStatusPMCos = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
@@ -129,15 +130,16 @@
             this.btnSPIRead0 = new System.Windows.Forms.Button();
             this.tbSPIReadReg0 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tbSY7D609_ReadReg_Indrect = new System.Windows.Forms.Button();
-            this.tbSY7D609_ReadReg = new System.Windows.Forms.Button();
-            this.tbSY7D609_R2 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_ReadReg1 = new System.Windows.Forms.Button();
             this.tbSY7D609_R1 = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.tbReg1FData0 = new System.Windows.Forms.TextBox();
-            this.btnReg1FWrite = new System.Windows.Forms.Button();
-            this.tbReg1FData2 = new System.Windows.Forms.TextBox();
-            this.tbReg1FData1 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_ReadReg2 = new System.Windows.Forms.Button();
+            this.tbSY7D609_R2 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_ReadReg3 = new System.Windows.Forms.Button();
+            this.tbSY7D609_R3 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_WriteReg4 = new System.Windows.Forms.Button();
+            this.btnSY7D609_ReadReg4 = new System.Windows.Forms.Button();
+            this.tbSY7D609_WR4 = new System.Windows.Forms.TextBox();
+            this.tbSY7D609_R4 = new System.Windows.Forms.TextBox();
             this.btnRegRead8 = new System.Windows.Forms.Button();
             this.btnRegWrite8 = new System.Windows.Forms.Button();
             this.btnRegRead7 = new System.Windows.Forms.Button();
@@ -164,11 +166,6 @@
             this.tbWriteRegData5 = new System.Windows.Forms.TextBox();
             this.btnRegRead0 = new System.Windows.Forms.Button();
             this.btnRegWrite0 = new System.Windows.Forms.Button();
-            this.btnSPIWrite4 = new System.Windows.Forms.Button();
-            this.tbSPIWriteData4 = new System.Windows.Forms.TextBox();
-            this.tbSPIWriteReg4 = new System.Windows.Forms.TextBox();
-            this.btnSPIRead3 = new System.Windows.Forms.Button();
-            this.tbSPIReadReg3 = new System.Windows.Forms.TextBox();
             this.btnSPIWrite3 = new System.Windows.Forms.Button();
             this.tbSPIWriteData3 = new System.Windows.Forms.TextBox();
             this.tbSPIWriteReg3 = new System.Windows.Forms.TextBox();
@@ -193,6 +190,24 @@
             this.label37 = new System.Windows.Forms.Label();
             this.tbWriteRegData0 = new System.Windows.Forms.TextBox();
             this.timer_100ms = new System.Windows.Forms.Timer(this.components);
+            this.btnSY7D609_ReadReg5 = new System.Windows.Forms.Button();
+            this.tbSY7D609_R5 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_ReadReg6 = new System.Windows.Forms.Button();
+            this.tbSY7D609_R6 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_ReadReg7 = new System.Windows.Forms.Button();
+            this.tbSY7D609_R7 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_ReadReg8 = new System.Windows.Forms.Button();
+            this.tbSY7D609_R8 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_WriteReg3 = new System.Windows.Forms.Button();
+            this.tbSY7D609_WR3 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_WriteReg2 = new System.Windows.Forms.Button();
+            this.tbSY7D609_WR2 = new System.Windows.Forms.TextBox();
+            this.btnSY7D609_WriteReg1 = new System.Windows.Forms.Button();
+            this.tbSY7D609_WR1 = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.btnPowerMeter = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -707,6 +722,11 @@
             // 
             // panel_status
             // 
+            this.panel_status.Controls.Add(this.btnPowerMeter);
+            this.panel_status.Controls.Add(this.label44);
+            this.panel_status.Controls.Add(this.label43);
+            this.panel_status.Controls.Add(this.label31);
+            this.panel_status.Controls.Add(this.btnReadDPTemp);
             this.panel_status.Controls.Add(this.label42);
             this.panel_status.Controls.Add(this.tbStatusPMCos);
             this.panel_status.Controls.Add(this.label41);
@@ -751,6 +771,16 @@
             this.panel_status.Name = "panel_status";
             this.panel_status.Size = new System.Drawing.Size(667, 296);
             this.panel_status.TabIndex = 27;
+            // 
+            // btnReadDPTemp
+            // 
+            this.btnReadDPTemp.Location = new System.Drawing.Point(550, 223);
+            this.btnReadDPTemp.Name = "btnReadDPTemp";
+            this.btnReadDPTemp.Size = new System.Drawing.Size(89, 61);
+            this.btnReadDPTemp.TabIndex = 67;
+            this.btnReadDPTemp.Text = "DP Temp\r\n00.00°C";
+            this.btnReadDPTemp.UseVisualStyleBackColor = true;
+            this.btnReadDPTemp.Click += new System.EventHandler(this.BtnReadDPTemp_Click);
             // 
             // label42
             // 
@@ -1229,15 +1259,30 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.tbSY7D609_ReadReg_Indrect);
-            this.panel2.Controls.Add(this.tbSY7D609_ReadReg);
-            this.panel2.Controls.Add(this.tbSY7D609_R2);
+            this.panel2.Controls.Add(this.btnSY7D609_WriteReg1);
+            this.panel2.Controls.Add(this.tbSY7D609_WR1);
+            this.panel2.Controls.Add(this.btnSY7D609_WriteReg2);
+            this.panel2.Controls.Add(this.tbSY7D609_WR2);
+            this.panel2.Controls.Add(this.btnSY7D609_WriteReg3);
+            this.panel2.Controls.Add(this.tbSY7D609_WR3);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg5);
+            this.panel2.Controls.Add(this.tbSY7D609_R5);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg6);
+            this.panel2.Controls.Add(this.tbSY7D609_R6);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg7);
+            this.panel2.Controls.Add(this.tbSY7D609_R7);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg8);
+            this.panel2.Controls.Add(this.tbSY7D609_R8);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg1);
             this.panel2.Controls.Add(this.tbSY7D609_R1);
-            this.panel2.Controls.Add(this.label31);
-            this.panel2.Controls.Add(this.tbReg1FData0);
-            this.panel2.Controls.Add(this.btnReg1FWrite);
-            this.panel2.Controls.Add(this.tbReg1FData2);
-            this.panel2.Controls.Add(this.tbReg1FData1);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg2);
+            this.panel2.Controls.Add(this.tbSY7D609_R2);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg3);
+            this.panel2.Controls.Add(this.tbSY7D609_R3);
+            this.panel2.Controls.Add(this.btnSY7D609_WriteReg4);
+            this.panel2.Controls.Add(this.btnSY7D609_ReadReg4);
+            this.panel2.Controls.Add(this.tbSY7D609_WR4);
+            this.panel2.Controls.Add(this.tbSY7D609_R4);
             this.panel2.Controls.Add(this.btnRegRead8);
             this.panel2.Controls.Add(this.btnRegWrite8);
             this.panel2.Controls.Add(this.btnRegRead7);
@@ -1266,13 +1311,8 @@
             this.panel2.Controls.Add(this.btnRegRead0);
             this.panel2.Controls.Add(this.btnRegWrite0);
             this.panel2.Controls.Add(this.button5);
-            this.panel2.Controls.Add(this.btnSPIWrite4);
-            this.panel2.Controls.Add(this.tbSPIWriteData4);
-            this.panel2.Controls.Add(this.tbSPIWriteReg4);
             this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.btnSPIRead3);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.tbSPIReadReg3);
             this.panel2.Controls.Add(this.btnSPIWrite3);
             this.panel2.Controls.Add(this.tbSPIWriteData3);
             this.panel2.Controls.Add(this.tbSPIWriteReg3);
@@ -1306,90 +1346,100 @@
             this.panel2.Size = new System.Drawing.Size(667, 296);
             this.panel2.TabIndex = 49;
             // 
-            // tbSY7D609_ReadReg_Indrect
+            // btnSY7D609_ReadReg1
             // 
-            this.tbSY7D609_ReadReg_Indrect.Location = new System.Drawing.Point(605, 227);
-            this.tbSY7D609_ReadReg_Indrect.Name = "tbSY7D609_ReadReg_Indrect";
-            this.tbSY7D609_ReadReg_Indrect.Size = new System.Drawing.Size(50, 22);
-            this.tbSY7D609_ReadReg_Indrect.TabIndex = 108;
-            this.tbSY7D609_ReadReg_Indrect.Text = "READ";
-            this.tbSY7D609_ReadReg_Indrect.UseVisualStyleBackColor = true;
-            this.tbSY7D609_ReadReg_Indrect.Click += new System.EventHandler(this.TbSY7D609_ReadReg_Indrect_Click);
-            // 
-            // tbSY7D609_ReadReg
-            // 
-            this.tbSY7D609_ReadReg.Location = new System.Drawing.Point(605, 199);
-            this.tbSY7D609_ReadReg.Name = "tbSY7D609_ReadReg";
-            this.tbSY7D609_ReadReg.Size = new System.Drawing.Size(50, 22);
-            this.tbSY7D609_ReadReg.TabIndex = 107;
-            this.tbSY7D609_ReadReg.Text = "READ";
-            this.tbSY7D609_ReadReg.UseVisualStyleBackColor = true;
-            this.tbSY7D609_ReadReg.Click += new System.EventHandler(this.TbSY7D609_ReadReg_Click);
-            // 
-            // tbSY7D609_R2
-            // 
-            this.tbSY7D609_R2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbSY7D609_R2.Location = new System.Drawing.Point(527, 227);
-            this.tbSY7D609_R2.Name = "tbSY7D609_R2";
-            this.tbSY7D609_R2.Size = new System.Drawing.Size(72, 22);
-            this.tbSY7D609_R2.TabIndex = 106;
-            this.tbSY7D609_R2.Text = "010203";
+            this.btnSY7D609_ReadReg1.Location = new System.Drawing.Point(350, 182);
+            this.btnSY7D609_ReadReg1.Name = "btnSY7D609_ReadReg1";
+            this.btnSY7D609_ReadReg1.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg1.TabIndex = 114;
+            this.btnSY7D609_ReadReg1.Text = "READ";
+            this.btnSY7D609_ReadReg1.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg1.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
             // 
             // tbSY7D609_R1
             // 
             this.tbSY7D609_R1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbSY7D609_R1.Location = new System.Drawing.Point(560, 199);
+            this.tbSY7D609_R1.Location = new System.Drawing.Point(305, 182);
             this.tbSY7D609_R1.Name = "tbSY7D609_R1";
             this.tbSY7D609_R1.Size = new System.Drawing.Size(39, 22);
-            this.tbSY7D609_R1.TabIndex = 105;
-            this.tbSY7D609_R1.Text = "1";
+            this.tbSY7D609_R1.TabIndex = 113;
+            this.tbSY7D609_R1.Text = "F";
             // 
-            // label31
+            // btnSY7D609_ReadReg2
             // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label31.Location = new System.Drawing.Point(304, 160);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(129, 15);
-            this.label31.TabIndex = 104;
-            this.label31.Text = "[7:6]    [5:3]    [2:0]";
+            this.btnSY7D609_ReadReg2.Location = new System.Drawing.Point(350, 208);
+            this.btnSY7D609_ReadReg2.Name = "btnSY7D609_ReadReg2";
+            this.btnSY7D609_ReadReg2.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg2.TabIndex = 112;
+            this.btnSY7D609_ReadReg2.Text = "READ";
+            this.btnSY7D609_ReadReg2.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg2.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
             // 
-            // tbReg1FData0
+            // tbSY7D609_R2
             // 
-            this.tbReg1FData0.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbReg1FData0.Location = new System.Drawing.Point(307, 178);
-            this.tbReg1FData0.Name = "tbReg1FData0";
-            this.tbReg1FData0.Size = new System.Drawing.Size(39, 22);
-            this.tbReg1FData0.TabIndex = 103;
-            this.tbReg1FData0.Text = "1";
+            this.tbSY7D609_R2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R2.Location = new System.Drawing.Point(305, 208);
+            this.tbSY7D609_R2.Name = "tbSY7D609_R2";
+            this.tbSY7D609_R2.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R2.TabIndex = 111;
+            this.tbSY7D609_R2.Text = "10";
             // 
-            // btnReg1FWrite
+            // btnSY7D609_ReadReg3
             // 
-            this.btnReg1FWrite.Location = new System.Drawing.Point(442, 178);
-            this.btnReg1FWrite.Name = "btnReg1FWrite";
-            this.btnReg1FWrite.Size = new System.Drawing.Size(50, 22);
-            this.btnReg1FWrite.TabIndex = 102;
-            this.btnReg1FWrite.Text = "0x1F";
-            this.btnReg1FWrite.UseVisualStyleBackColor = true;
-            this.btnReg1FWrite.Click += new System.EventHandler(this.BtnReg1FWrite_Click);
+            this.btnSY7D609_ReadReg3.Location = new System.Drawing.Point(350, 234);
+            this.btnSY7D609_ReadReg3.Name = "btnSY7D609_ReadReg3";
+            this.btnSY7D609_ReadReg3.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg3.TabIndex = 110;
+            this.btnSY7D609_ReadReg3.Text = "READ";
+            this.btnSY7D609_ReadReg3.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg3.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
             // 
-            // tbReg1FData2
+            // tbSY7D609_R3
             // 
-            this.tbReg1FData2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbReg1FData2.Location = new System.Drawing.Point(397, 178);
-            this.tbReg1FData2.Name = "tbReg1FData2";
-            this.tbReg1FData2.Size = new System.Drawing.Size(39, 22);
-            this.tbReg1FData2.TabIndex = 101;
-            this.tbReg1FData2.Text = "1";
+            this.tbSY7D609_R3.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R3.Location = new System.Drawing.Point(305, 234);
+            this.tbSY7D609_R3.Name = "tbSY7D609_R3";
+            this.tbSY7D609_R3.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R3.TabIndex = 109;
+            this.tbSY7D609_R3.Text = "11";
             // 
-            // tbReg1FData1
+            // btnSY7D609_WriteReg4
             // 
-            this.tbReg1FData1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbReg1FData1.Location = new System.Drawing.Point(352, 178);
-            this.tbReg1FData1.Name = "tbReg1FData1";
-            this.tbReg1FData1.Size = new System.Drawing.Size(39, 22);
-            this.tbReg1FData1.TabIndex = 100;
-            this.tbReg1FData1.Text = "1";
+            this.btnSY7D609_WriteReg4.Location = new System.Drawing.Point(608, 260);
+            this.btnSY7D609_WriteReg4.Name = "btnSY7D609_WriteReg4";
+            this.btnSY7D609_WriteReg4.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_WriteReg4.TabIndex = 108;
+            this.btnSY7D609_WriteReg4.Text = "WR";
+            this.btnSY7D609_WriteReg4.UseVisualStyleBackColor = true;
+            this.btnSY7D609_WriteReg4.Click += new System.EventHandler(this.btnSY7D609_WriteReg_Clicked);
+            // 
+            // btnSY7D609_ReadReg4
+            // 
+            this.btnSY7D609_ReadReg4.Location = new System.Drawing.Point(350, 260);
+            this.btnSY7D609_ReadReg4.Name = "btnSY7D609_ReadReg4";
+            this.btnSY7D609_ReadReg4.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg4.TabIndex = 107;
+            this.btnSY7D609_ReadReg4.Text = "READ";
+            this.btnSY7D609_ReadReg4.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg4.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
+            // 
+            // tbSY7D609_WR4
+            // 
+            this.tbSY7D609_WR4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_WR4.Location = new System.Drawing.Point(520, 260);
+            this.tbSY7D609_WR4.Name = "tbSY7D609_WR4";
+            this.tbSY7D609_WR4.Size = new System.Drawing.Size(82, 22);
+            this.tbSY7D609_WR4.TabIndex = 106;
+            this.tbSY7D609_WR4.Text = "01020304";
+            // 
+            // tbSY7D609_R4
+            // 
+            this.tbSY7D609_R4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R4.Location = new System.Drawing.Point(305, 260);
+            this.tbSY7D609_R4.Name = "tbSY7D609_R4";
+            this.tbSY7D609_R4.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R4.TabIndex = 105;
+            this.tbSY7D609_R4.Text = "12";
             // 
             // btnRegRead8
             // 
@@ -1647,53 +1697,6 @@
             this.btnRegWrite0.UseVisualStyleBackColor = true;
             this.btnRegWrite0.Click += new System.EventHandler(this.btnRegWrite_Clicked);
             // 
-            // btnSPIWrite4
-            // 
-            this.btnSPIWrite4.Location = new System.Drawing.Point(408, 125);
-            this.btnSPIWrite4.Name = "btnSPIWrite4";
-            this.btnSPIWrite4.Size = new System.Drawing.Size(50, 22);
-            this.btnSPIWrite4.TabIndex = 68;
-            this.btnSPIWrite4.Text = "Write";
-            this.btnSPIWrite4.UseVisualStyleBackColor = true;
-            this.btnSPIWrite4.Click += new System.EventHandler(this.btnSPIWrite_Clicked);
-            // 
-            // tbSPIWriteData4
-            // 
-            this.tbSPIWriteData4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbSPIWriteData4.Location = new System.Drawing.Point(353, 125);
-            this.tbSPIWriteData4.Name = "tbSPIWriteData4";
-            this.tbSPIWriteData4.Size = new System.Drawing.Size(39, 22);
-            this.tbSPIWriteData4.TabIndex = 67;
-            this.tbSPIWriteData4.Text = "1";
-            // 
-            // tbSPIWriteReg4
-            // 
-            this.tbSPIWriteReg4.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbSPIWriteReg4.Location = new System.Drawing.Point(302, 125);
-            this.tbSPIWriteReg4.Name = "tbSPIWriteReg4";
-            this.tbSPIWriteReg4.Size = new System.Drawing.Size(39, 22);
-            this.tbSPIWriteReg4.TabIndex = 66;
-            this.tbSPIWriteReg4.Text = "1";
-            // 
-            // btnSPIRead3
-            // 
-            this.btnSPIRead3.Location = new System.Drawing.Point(519, 126);
-            this.btnSPIRead3.Name = "btnSPIRead3";
-            this.btnSPIRead3.Size = new System.Drawing.Size(50, 22);
-            this.btnSPIRead3.TabIndex = 65;
-            this.btnSPIRead3.Text = "Read";
-            this.btnSPIRead3.UseVisualStyleBackColor = true;
-            this.btnSPIRead3.Click += new System.EventHandler(this.btnSPIRead_Clicked);
-            // 
-            // tbSPIReadReg3
-            // 
-            this.tbSPIReadReg3.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.tbSPIReadReg3.Location = new System.Drawing.Point(474, 126);
-            this.tbSPIReadReg3.Name = "tbSPIReadReg3";
-            this.tbSPIReadReg3.Size = new System.Drawing.Size(39, 22);
-            this.tbSPIReadReg3.TabIndex = 64;
-            this.tbSPIReadReg3.Text = "1";
-            // 
             // btnSPIWrite3
             // 
             this.btnSPIWrite3.Location = new System.Drawing.Point(408, 97);
@@ -1915,8 +1918,180 @@
             // timer_100ms
             // 
             this.timer_100ms.Enabled = true;
-            this.timer_100ms.Interval = 1000;
             this.timer_100ms.Tick += new System.EventHandler(this.timer_100ms_Tick);
+            // 
+            // btnSY7D609_ReadReg5
+            // 
+            this.btnSY7D609_ReadReg5.Location = new System.Drawing.Point(451, 182);
+            this.btnSY7D609_ReadReg5.Name = "btnSY7D609_ReadReg5";
+            this.btnSY7D609_ReadReg5.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg5.TabIndex = 122;
+            this.btnSY7D609_ReadReg5.Text = "READ";
+            this.btnSY7D609_ReadReg5.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg5.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
+            // 
+            // tbSY7D609_R5
+            // 
+            this.tbSY7D609_R5.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R5.Location = new System.Drawing.Point(406, 182);
+            this.tbSY7D609_R5.Name = "tbSY7D609_R5";
+            this.tbSY7D609_R5.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R5.TabIndex = 121;
+            this.tbSY7D609_R5.Text = "47";
+            // 
+            // btnSY7D609_ReadReg6
+            // 
+            this.btnSY7D609_ReadReg6.Location = new System.Drawing.Point(451, 208);
+            this.btnSY7D609_ReadReg6.Name = "btnSY7D609_ReadReg6";
+            this.btnSY7D609_ReadReg6.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg6.TabIndex = 120;
+            this.btnSY7D609_ReadReg6.Text = "READ";
+            this.btnSY7D609_ReadReg6.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg6.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
+            // 
+            // tbSY7D609_R6
+            // 
+            this.tbSY7D609_R6.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R6.Location = new System.Drawing.Point(406, 208);
+            this.tbSY7D609_R6.Name = "tbSY7D609_R6";
+            this.tbSY7D609_R6.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R6.TabIndex = 119;
+            this.tbSY7D609_R6.Text = "48";
+            // 
+            // btnSY7D609_ReadReg7
+            // 
+            this.btnSY7D609_ReadReg7.Location = new System.Drawing.Point(451, 234);
+            this.btnSY7D609_ReadReg7.Name = "btnSY7D609_ReadReg7";
+            this.btnSY7D609_ReadReg7.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg7.TabIndex = 118;
+            this.btnSY7D609_ReadReg7.Text = "READ";
+            this.btnSY7D609_ReadReg7.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg7.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
+            // 
+            // tbSY7D609_R7
+            // 
+            this.tbSY7D609_R7.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R7.Location = new System.Drawing.Point(406, 234);
+            this.tbSY7D609_R7.Name = "tbSY7D609_R7";
+            this.tbSY7D609_R7.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R7.TabIndex = 117;
+            this.tbSY7D609_R7.Text = "4F";
+            // 
+            // btnSY7D609_ReadReg8
+            // 
+            this.btnSY7D609_ReadReg8.Location = new System.Drawing.Point(451, 260);
+            this.btnSY7D609_ReadReg8.Name = "btnSY7D609_ReadReg8";
+            this.btnSY7D609_ReadReg8.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_ReadReg8.TabIndex = 116;
+            this.btnSY7D609_ReadReg8.Text = "READ";
+            this.btnSY7D609_ReadReg8.UseVisualStyleBackColor = true;
+            this.btnSY7D609_ReadReg8.Click += new System.EventHandler(this.tbSY7D609_ReadReg_Clicked);
+            // 
+            // tbSY7D609_R8
+            // 
+            this.tbSY7D609_R8.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_R8.Location = new System.Drawing.Point(406, 260);
+            this.tbSY7D609_R8.Name = "tbSY7D609_R8";
+            this.tbSY7D609_R8.Size = new System.Drawing.Size(39, 22);
+            this.tbSY7D609_R8.TabIndex = 115;
+            this.tbSY7D609_R8.Text = "50";
+            // 
+            // btnSY7D609_WriteReg3
+            // 
+            this.btnSY7D609_WriteReg3.Location = new System.Drawing.Point(607, 234);
+            this.btnSY7D609_WriteReg3.Name = "btnSY7D609_WriteReg3";
+            this.btnSY7D609_WriteReg3.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_WriteReg3.TabIndex = 124;
+            this.btnSY7D609_WriteReg3.Text = "WR";
+            this.btnSY7D609_WriteReg3.UseVisualStyleBackColor = true;
+            this.btnSY7D609_WriteReg3.Click += new System.EventHandler(this.btnSY7D609_WriteReg_Clicked);
+            // 
+            // tbSY7D609_WR3
+            // 
+            this.tbSY7D609_WR3.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_WR3.Location = new System.Drawing.Point(519, 234);
+            this.tbSY7D609_WR3.Name = "tbSY7D609_WR3";
+            this.tbSY7D609_WR3.Size = new System.Drawing.Size(82, 22);
+            this.tbSY7D609_WR3.TabIndex = 123;
+            this.tbSY7D609_WR3.Text = "01020304";
+            // 
+            // btnSY7D609_WriteReg2
+            // 
+            this.btnSY7D609_WriteReg2.Location = new System.Drawing.Point(607, 208);
+            this.btnSY7D609_WriteReg2.Name = "btnSY7D609_WriteReg2";
+            this.btnSY7D609_WriteReg2.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_WriteReg2.TabIndex = 126;
+            this.btnSY7D609_WriteReg2.Text = "WR";
+            this.btnSY7D609_WriteReg2.UseVisualStyleBackColor = true;
+            this.btnSY7D609_WriteReg2.Click += new System.EventHandler(this.btnSY7D609_WriteReg_Clicked);
+            // 
+            // tbSY7D609_WR2
+            // 
+            this.tbSY7D609_WR2.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_WR2.Location = new System.Drawing.Point(519, 208);
+            this.tbSY7D609_WR2.Name = "tbSY7D609_WR2";
+            this.tbSY7D609_WR2.Size = new System.Drawing.Size(82, 22);
+            this.tbSY7D609_WR2.TabIndex = 125;
+            this.tbSY7D609_WR2.Text = "48200000";
+            // 
+            // btnSY7D609_WriteReg1
+            // 
+            this.btnSY7D609_WriteReg1.Location = new System.Drawing.Point(607, 182);
+            this.btnSY7D609_WriteReg1.Name = "btnSY7D609_WriteReg1";
+            this.btnSY7D609_WriteReg1.Size = new System.Drawing.Size(50, 22);
+            this.btnSY7D609_WriteReg1.TabIndex = 128;
+            this.btnSY7D609_WriteReg1.Text = "WR";
+            this.btnSY7D609_WriteReg1.UseVisualStyleBackColor = true;
+            this.btnSY7D609_WriteReg1.Click += new System.EventHandler(this.btnSY7D609_WriteReg_Clicked);
+            // 
+            // tbSY7D609_WR1
+            // 
+            this.tbSY7D609_WR1.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbSY7D609_WR1.Location = new System.Drawing.Point(519, 182);
+            this.tbSY7D609_WR1.Name = "tbSY7D609_WR1";
+            this.tbSY7D609_WR1.Size = new System.Drawing.Size(82, 22);
+            this.tbSY7D609_WR1.TabIndex = 127;
+            this.tbSY7D609_WR1.Text = "47200000";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label31.Location = new System.Drawing.Point(234, 110);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(16, 15);
+            this.label31.TabIndex = 68;
+            this.label31.Text = "V";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label43.Location = new System.Drawing.Point(234, 141);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(16, 15);
+            this.label43.TabIndex = 69;
+            this.label43.Text = "A";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label44.Location = new System.Drawing.Point(234, 265);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(33, 15);
+            this.label44.TabIndex = 70;
+            this.label44.Text = "W/h";
+            // 
+            // btnPowerMeter
+            // 
+            this.btnPowerMeter.Location = new System.Drawing.Point(550, 154);
+            this.btnPowerMeter.Name = "btnPowerMeter";
+            this.btnPowerMeter.Size = new System.Drawing.Size(89, 61);
+            this.btnPowerMeter.TabIndex = 71;
+            this.btnPowerMeter.Text = "현재 소비량\r\n000.00W";
+            this.btnPowerMeter.UseVisualStyleBackColor = true;
+            this.btnPowerMeter.Click += new System.EventHandler(this.BtnPowerMeter_Click);
             // 
             // IOBoard
             // 
@@ -2065,11 +2240,6 @@
         private System.Windows.Forms.TextBox tbWriteRegData2;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox tbWriteRegData0;
-        private System.Windows.Forms.Button btnSPIWrite4;
-        private System.Windows.Forms.TextBox tbSPIWriteData4;
-        private System.Windows.Forms.TextBox tbSPIWriteReg4;
-        private System.Windows.Forms.Button btnSPIRead3;
-        private System.Windows.Forms.TextBox tbSPIReadReg3;
         private System.Windows.Forms.Button btnSPIWrite3;
         private System.Windows.Forms.TextBox tbSPIWriteData3;
         private System.Windows.Forms.TextBox tbSPIWriteReg3;
@@ -2109,15 +2279,10 @@
         private System.Windows.Forms.TextBox tbWriteRegData6;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox tbWriteRegData5;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox tbReg1FData0;
-        private System.Windows.Forms.Button btnReg1FWrite;
-        private System.Windows.Forms.TextBox tbReg1FData2;
-        private System.Windows.Forms.TextBox tbReg1FData1;
-        private System.Windows.Forms.Button tbSY7D609_ReadReg;
-        private System.Windows.Forms.TextBox tbSY7D609_R2;
-        private System.Windows.Forms.TextBox tbSY7D609_R1;
-        private System.Windows.Forms.Button tbSY7D609_ReadReg_Indrect;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg4;
+        private System.Windows.Forms.TextBox tbSY7D609_WR4;
+        private System.Windows.Forms.TextBox tbSY7D609_R4;
+        private System.Windows.Forms.Button btnSY7D609_WriteReg4;
         private System.Windows.Forms.Timer timer_100ms;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.TextBox tbPS;
@@ -2134,5 +2299,30 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.TextBox tbStatusPMCos;
+        private System.Windows.Forms.Button btnReadDPTemp;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg1;
+        private System.Windows.Forms.TextBox tbSY7D609_R1;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg2;
+        private System.Windows.Forms.TextBox tbSY7D609_R2;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg3;
+        private System.Windows.Forms.TextBox tbSY7D609_R3;
+        private System.Windows.Forms.Button btnSY7D609_WriteReg1;
+        private System.Windows.Forms.TextBox tbSY7D609_WR1;
+        private System.Windows.Forms.Button btnSY7D609_WriteReg2;
+        private System.Windows.Forms.TextBox tbSY7D609_WR2;
+        private System.Windows.Forms.Button btnSY7D609_WriteReg3;
+        private System.Windows.Forms.TextBox tbSY7D609_WR3;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg5;
+        private System.Windows.Forms.TextBox tbSY7D609_R5;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg6;
+        private System.Windows.Forms.TextBox tbSY7D609_R6;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg7;
+        private System.Windows.Forms.TextBox tbSY7D609_R7;
+        private System.Windows.Forms.Button btnSY7D609_ReadReg8;
+        private System.Windows.Forms.TextBox tbSY7D609_R8;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Button btnPowerMeter;
     }
 }

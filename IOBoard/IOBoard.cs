@@ -63,11 +63,12 @@ namespace IOBoard
             public float Apparent;
             public float Active_Energy;
             public Int16 Rtd;
-            public UInt16 Dps;
-            public UInt16 Ps;
+            public Int16 Dps;
+            public Int16 Ps;
             public UInt16[] Ai;
             public byte[] Di;
             public byte[] Do;
+            public UInt16[] AiNew;
         }
 
         enum Packet : byte { STX = 0x55, ETX = 0x03, CHECKSUM = 0x00, DATA = 0x00, MAX_LENGTH = 0xf0, ERROR = 0x00, SUCCESS = 0x01 };
@@ -90,9 +91,16 @@ namespace IOBoard
 
             RxMessage.data = new byte[256];
             stIOStatus.Ai = new UInt16[2];
+            stIOStatus.AiNew = new UInt16[6];
             stIOStatus.Di = new byte[4];
             stIOStatus.Do = new byte[2];
 
+            //panel_PowerSET
+            panel_PowerSET.Visible = false;
+            panel_PowerSET.Location = new Point(317, 0);
+            //panel_ICSET
+            panel_ICSET.Visible = false;
+            panel_ICSET.Location = new Point(317, 0);
             //panel_setConfig
             panel_config.Visible = false;
             panel_config.Location = new Point(317, 0);
@@ -160,6 +168,7 @@ namespace IOBoard
                 catch { }
                 panel_sendData.Controls.Add(tbData[i]);
             }
+            splitContainer1.Size = new Size(1000, 280);
         }
 
         private void IOBoard_Load(object sender, EventArgs e)
@@ -504,11 +513,11 @@ namespace IOBoard
                     stIOStatus.Active = BitConverter.ToSingle(RxMessage.data, 12);
                     stIOStatus.Reactive = BitConverter.ToSingle(RxMessage.data, 16);
                     stIOStatus.Apparent = BitConverter.ToSingle(RxMessage.data, 20);
-                    stIOStatus.Active_Energy = BitConverter.ToSingle(RxMessage.data, 24);
+                    stIOStatus.Active_Energy = BitConverter.ToUInt32(RxMessage.data, 24);
 
                     stIOStatus.Rtd = BitConverter.ToInt16(RxMessage.data, 28);
-                    stIOStatus.Dps = BitConverter.ToUInt16(RxMessage.data, 30);
-                    stIOStatus.Ps = BitConverter.ToUInt16(RxMessage.data, 32);
+                    stIOStatus.Dps = BitConverter.ToInt16(RxMessage.data, 30);
+                    stIOStatus.Ps = BitConverter.ToInt16(RxMessage.data, 32);
                     stIOStatus.Ai[0] = BitConverter.ToUInt16(RxMessage.data, 34);
                     stIOStatus.Ai[1] = BitConverter.ToUInt16(RxMessage.data, 36);
 
@@ -518,6 +527,14 @@ namespace IOBoard
                     stIOStatus.Di[3] = RxMessage.data[41];
                     stIOStatus.Do[0] = RxMessage.data[42];
                     stIOStatus.Do[1] = RxMessage.data[43];
+
+                    stIOStatus.AiNew[0] = BitConverter.ToUInt16(RxMessage.data, 44);
+                    stIOStatus.AiNew[1] = BitConverter.ToUInt16(RxMessage.data, 46);
+                    stIOStatus.AiNew[2] = BitConverter.ToUInt16(RxMessage.data, 48);
+                    stIOStatus.AiNew[3] = BitConverter.ToUInt16(RxMessage.data, 50);
+                    stIOStatus.AiNew[4] = BitConverter.ToUInt16(RxMessage.data, 52);
+                    stIOStatus.AiNew[5] = BitConverter.ToUInt16(RxMessage.data, 54);
+                    
 
                     this.Invoke(new Action(delegate ()
                     {
@@ -533,15 +550,22 @@ namespace IOBoard
                         tbAI0.Text = string.Format("{0:0.000} ", ((float)stIOStatus.Ai[0] / 1000));
                         tbAI1.Text = string.Format("{0:0.000} ", ((float)stIOStatus.Ai[1] / 1000));
                         tbPS.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Ps / 100));
-                        tbStatusDP.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Dps / 100));
+                        tbStatusDP.Text = string.Format("{0:0.00} ", ((float)stIOStatus.Dps));
 
                         tbStatusPMVolts.Text = string.Format("{0:0.00} ", stIOStatus.Volt);
-                        tbStatusPMCurrent.Text = string.Format("{0:0.00} ", stIOStatus.Current);
+                        tbStatusPMCurrent.Text = string.Format("{0:0.000} ", stIOStatus.Current);
                         tbStatusPMActive.Text = string.Format("{0:0.00} ", stIOStatus.Active);
                         tbStatusPMReactive.Text = string.Format("{0:0.00} ", stIOStatus.Reactive);
                         tbStatusPMApparent.Text = string.Format("{0:0.00} ", stIOStatus.Apparent);
-                        tbStatusPMEnergy.Text = string.Format("{0:0.000} ", stIOStatus.Active_Energy);
+                        tbStatusPMEnergy.Text = stIOStatus.Active_Energy.ToString();
                         tbStatusPMCos.Text = string.Format("{0:0.00} ", stIOStatus.Cos);
+
+                        tbAI2.Text = string.Format("{0:0.000} ", ((float)stIOStatus.AiNew[0] / 1000));
+                        tbAI3.Text = string.Format("{0:0.000} ", ((float)stIOStatus.AiNew[1] / 1000));
+                        tbAI4.Text = string.Format("{0:0.000} ", ((float)stIOStatus.AiNew[2] / 1000));
+                        tbAI5.Text = string.Format("{0:0.000} ", ((float)stIOStatus.AiNew[3] / 1000));
+                        tbAI6.Text = string.Format("{0:0.000} ", ((float)stIOStatus.AiNew[4] / 1000));
+                        tbAI7.Text = string.Format("{0:0.000} ", ((float)stIOStatus.AiNew[5] / 1000));
 
                     }));
                     break;
@@ -549,7 +573,7 @@ namespace IOBoard
                     Console.WriteLine("MSGCMD_RESPONSE_TIME 0x21U");
                     this.Invoke(new Action(delegate ()
                     {
-                        lbBoardTime.Text = (RxMessage.data[0] + 2000).ToString() + "-" + RxMessage.data[1].ToString() + "-" + RxMessage.data[2].ToString() + " " + RxMessage.data[3].ToString() + ":" + RxMessage.data[4].ToString() + ":" + RxMessage.data[5].ToString() + " V" + RxMessage.data[6].ToString() + "." + RxMessage.data[7].ToString();
+                        lbBoardTime.Text = (RxMessage.data[0] + 2000).ToString() + "-" + RxMessage.data[1].ToString() + "-" + RxMessage.data[2].ToString() + " " + RxMessage.data[3].ToString() + ":" + RxMessage.data[4].ToString() + ":" + RxMessage.data[5].ToString() + " V" + (RxMessage.data[6]/10).ToString()+"." + (RxMessage.data[6] % 10).ToString();
                     }));
                     
                     break;
@@ -568,6 +592,9 @@ namespace IOBoard
                         tbPMVolt.Text = (RxMessage.data[8] + (RxMessage.data[9] << 8)).ToString();
                         tbPMCurrent.Text = RxMessage.data[10].ToString();
                         tbPMFreq.Text = RxMessage.data[11].ToString();
+                        tbInputRatio.Text = RxMessage.data[12].ToString();
+                        tbInputVolt.Text = RxMessage.data[13].ToString();
+                        tbInputPF.Text = RxMessage.data[15].ToString();
                     }));
                     break;
                 case 0x2F: //Firmware ACK
@@ -578,13 +605,27 @@ namespace IOBoard
                 case 0xE3:
                     this.Invoke(new Action(delegate ()
                     {
-                        btnReadDPTemp.Text = string.Format("DP Temp\r\n {0:0.00} °C", BitConverter.ToSingle(RxMessage.data, 0));
+                        btnReadPSTemp.Text = string.Format("PS Temp\r\n {0:0.00} °C", BitConverter.ToSingle(RxMessage.data, 0));
+                        btnReadDPTemp.Text = string.Format("DP Temp\r\n {0:0.00} °C", BitConverter.ToSingle(RxMessage.data, 4));
+                    })); 
+                    break;
+                case 0xE4:
+                    this.Invoke(new Action(delegate ()
+                    {
+                        btnSumPowerMeter.Text = string.Format("누적 소비량\r\n {0:#,0} mW", BitConverter.ToInt64(RxMessage.data, 0));
                     }));
                     break;
                 case 0xE2:
                     this.Invoke(new Action(delegate ()
                     {
-                        btnPowerMeter.Text = string.Format("현재 소비량\r\n {0:0.000} W", BitConverter.ToSingle(RxMessage.data, 0));
+                        btnPowerMeter.Text = string.Format("현재 소비량\r\n {0:#,0.000} W", BitConverter.ToSingle(RxMessage.data, 0));
+                    }));
+                    break;
+                case 0x2B:
+                    this.Invoke(new Action(delegate ()
+                    {
+                        tbIGain.Text = BitConverter.ToInt32(RxMessage.data, 0).ToString();
+                        tbVGain.Text = BitConverter.ToInt32(RxMessage.data, 4).ToString();
                     }));
                     break;
                 default:
@@ -640,11 +681,18 @@ namespace IOBoard
             }
         }
 
+        bool flag_requestStatus = false;
         private void timer_1s_interrupt(object sender, EventArgs e)
         {
             if (flag_FirmwareUploading == true)
             {
                 //sendFirmwareUpload(cntSendingFirmwareUpload);
+            }
+
+            if(flag_requestStatus)
+            {
+                byte[] tmpPayload = new byte[0];
+                SendPacket(0xd5, tmpPayload);
             }
         }
 
@@ -750,8 +798,8 @@ namespace IOBoard
                         {
                             firmwarePacket[i, fwByteIndex + 2] = tmpFwData[fwByteIndex];
                         }
-                        firmwarePacket[i,0] = (byte)((i >> 8) & 0xFF);
-                        firmwarePacket[i,1] = (byte)(i  & 0xFF);
+                        firmwarePacket[i,1] = (byte)((i >> 8) & 0xFF);
+                        firmwarePacket[i,0] = (byte)(i  & 0xFF);
                     }
                     firmwarePacket[FwTotalNo - 1, 0] |= 0x80; /* 마지막 패킷은 순번의 최상위 비트 SET */
 
@@ -775,7 +823,7 @@ namespace IOBoard
 
         private void btnUpdateConfig_Click(object sender, EventArgs e)
         {
-            byte[] tmpPayload = new byte[12];
+            byte[] tmpPayload = new byte[16];
             tmpPayload[0] = (byte)Convert.ToInt32(tbDO0.Text);
             tmpPayload[1] = (byte)Convert.ToInt32(tbDO1.Text);
             tmpPayload[2] = (byte)Convert.ToInt32(tbRTDCycle.Text);
@@ -788,6 +836,10 @@ namespace IOBoard
             tmpPayload[9] = (byte)(Convert.ToInt32(tbPMVolt.Text) >> 8);
             tmpPayload[10] = (byte)Convert.ToInt32(tbPMCurrent.Text);
             tmpPayload[11] = (byte)Convert.ToInt32(tbPMFreq.Text);
+            tmpPayload[12] = (byte)Convert.ToInt32(tbInputRatio.Text);
+            tmpPayload[13] = (byte)Convert.ToInt32(tbInputVolt.Text);
+            tmpPayload[14] = 0;
+            tmpPayload[15] = (byte)Convert.ToInt32(tbInputPF.Text);
             SendPacket(0x12, tmpPayload);
         }
 
@@ -842,6 +894,35 @@ namespace IOBoard
 
                 panel_status.Visible = false;
                 btnViewStatusValue.BackColor = Color.Gainsboro;
+
+                panel_ICSET.Visible = false;
+                btnSettingSPI_IC.BackColor = Color.Gainsboro;
+
+                panel_PowerSET.Visible = false;
+                btnSetEMP_IC.BackColor = Color.Gainsboro;
+            }
+        }
+
+        private void BtnSettingSPI_IC_Click(object sender, EventArgs e)
+        {
+            if (panel_ICSET.Visible == true)
+            {
+                panel_ICSET.Visible = false;
+                btnSettingSPI_IC.BackColor = Color.Gainsboro;
+            }
+            else
+            {
+                panel_status.Visible = false;
+                btnViewStatusValue.BackColor = Color.Gainsboro;
+
+                panel_config.Visible = false;
+                btnSetConfig.BackColor = Color.Gainsboro;
+
+                panel_ICSET.Visible = true;
+                btnSettingSPI_IC.BackColor = Color.Green;
+
+                panel_PowerSET.Visible = false;
+                btnSetEMP_IC.BackColor = Color.Gainsboro;
             }
         }
 
@@ -859,6 +940,35 @@ namespace IOBoard
 
                 panel_config.Visible = false;
                 btnSetConfig.BackColor = Color.Gainsboro;
+
+                panel_ICSET.Visible = false;
+                btnSettingSPI_IC.BackColor = Color.Gainsboro;
+
+                panel_PowerSET.Visible = false;
+                btnSetEMP_IC.BackColor = Color.Gainsboro;
+            }
+        }
+
+        private void BtnSetEMP_IC_Click(object sender, EventArgs e)
+        {
+            if (panel_PowerSET.Visible == true)
+            {
+                panel_PowerSET.Visible = false;
+                btnSetEMP_IC.BackColor = Color.Gainsboro;
+            }
+            else
+            {
+                panel_status.Visible = false;
+                btnViewStatusValue.BackColor = Color.Gainsboro;
+
+                panel_config.Visible = false;
+                btnSetConfig.BackColor = Color.Gainsboro;
+
+                panel_ICSET.Visible = false;
+                btnSettingSPI_IC.BackColor = Color.Gainsboro;
+
+                panel_PowerSET.Visible = true;
+                btnSetEMP_IC.BackColor = Color.Green;
             }
         }
 
@@ -1063,6 +1173,44 @@ namespace IOBoard
         {
             byte[] tmpPayload = new byte[1] { 0x00 };
             SendPacket(0xE2, tmpPayload);
+
+            tmpPayload = new byte[1] { 0x25 };
+            SendPacket(0xE0, tmpPayload);
+        }
+
+        private void BtnUpdateCalValue_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[8];
+            tmpPayload[0] = (byte)Convert.ToInt32(tbIGain.Text);
+            tmpPayload[1] = (byte)(Convert.ToInt32(tbIGain.Text) >> 8);
+            tmpPayload[2] = (byte)(Convert.ToInt32(tbIGain.Text) >> 16);
+            tmpPayload[3] = (byte)(Convert.ToInt32(tbIGain.Text) >> 24);
+            tmpPayload[4] = (byte)Convert.ToInt32(tbVGain.Text);
+            tmpPayload[5] = (byte)(Convert.ToInt32(tbVGain.Text) >> 8);
+            tmpPayload[6] = (byte)(Convert.ToInt32(tbVGain.Text) >> 16);
+            tmpPayload[7] = (byte)(Convert.ToInt32(tbVGain.Text) >> 24);
+            SendPacket(0x1C, tmpPayload);
+        }
+
+        private void BtnSumPowerReset_Click(object sender, EventArgs e)
+        {
+            byte[] tmpPayload = new byte[1] { 0x00 };
+            SendPacket(0x1D, tmpPayload);
+        }
+
+        private void BtnStatusRequestCont_Click(object sender, EventArgs e)
+        {
+            if (btnStatusRequestCont.BackColor == Color.Green)
+            {
+                btnStatusRequestCont.BackColor = Color.Gainsboro;
+                flag_requestStatus = false;
+            }
+            else
+            {
+                btnStatusRequestCont.BackColor = Color.Green;
+                flag_requestStatus = true;
+            }
+
         }
     }
 
